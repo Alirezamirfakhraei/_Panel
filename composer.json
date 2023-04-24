@@ -27,8 +27,13 @@
             "App\\": "app/",
             "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
+            "Database\\Seeders\\": "database/seeders/",
+            "Modules\\Users\\": "Modules/Users",
+            "Modules\\Auth\\": "Modules/Auth"
+        },
+        "files": [
+            "Helper/Helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,7 +18,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'userID',
+        'role',
+        'gender',
+        'fullName',
         'email',
         'password',
     ];
@@ -51,4 +54,18 @@ class User extends Authenticatable
     {
         return [];
     }
+    public const STATUS_ACTIVE = 'active';
+    public const STATUS_INACTIVE = 'inactive';
+    public static array $status = [self::STATUS_ACTIVE , self::STATUS_INACTIVE];
+
+
+    protected static function boot()
+    {
+        parent::boot();
+        // auto-sets values on creation
+        static::creating(function ($query) {
+            $query->status = self::STATUS_INACTIVE;
+        });
+    }
+
 }

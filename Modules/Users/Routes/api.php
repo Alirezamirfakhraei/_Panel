@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use Modules\Users\Http\Controllers\UsersController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,9 +11,4 @@ use Modules\Users\Http\Controllers\UsersController;
 |
 */
 
-Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
-    Route::controller(UsersController::class)->group(function () {
-    Route::post('register', '');
-    Route::post('login', '');
-    });
-});
+
