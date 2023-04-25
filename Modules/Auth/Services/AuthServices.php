@@ -54,7 +54,12 @@ class AuthServices
         if ($credentials) {
             $token = auth()->attempt($credentials);
             if ($token) {
-                return $this->createNewToken($token);
+                $status = User::query()->where('userID' , $request['userID'])->update([
+                    'status' => User::STATUS_ACTIVE,
+                ]);
+                if ($status){
+                    return $this->createNewToken($token);
+                }
             }
             return false;
         }
