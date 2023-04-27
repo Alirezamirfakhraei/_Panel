@@ -12,6 +12,8 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -58,6 +60,17 @@ class User extends Authenticatable implements JWTSubject
     public const STATUS_INACTIVE = 'inactive';
     public static array $status = [self::STATUS_ACTIVE , self::STATUS_INACTIVE];
 
+
+    public static function createToken($codeLength = 50)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $codeLength; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
     protected static function boot()
     {

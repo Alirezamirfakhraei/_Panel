@@ -5,6 +5,7 @@ namespace Modules\Auth\Http\Controllers\V1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Modules\Auth\Http\Requests\AddUserRequest;
 use Modules\Auth\Repositories\AuthRepositories;
 use Modules\Auth\Services\AuthServices;
 use Modules\Users\Models\User;
@@ -46,6 +47,11 @@ class SupportController extends Controller
     public function refresh()
     {
         return $this->services->refresh();
+    }
+
+    public function addUsers(AddUserRequest $request)
+    {
+        return $this->services->addUsers( $request);
     }
 
     //repository

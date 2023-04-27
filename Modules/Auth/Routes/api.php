@@ -23,5 +23,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
         Route::get('support/profile', 'profile');
         Route::post('support/user/edit', 'edit');
         Route::get('support/user/All', 'sendUsers');
+        Route::post('support/user/add', 'addUsers');
     });
 });

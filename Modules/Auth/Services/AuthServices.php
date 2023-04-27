@@ -5,9 +5,12 @@ namespace Modules\Auth\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Modules\Auth\Http\Requests\AddUserRequest;
 use Modules\Users\Models\User;
 use helper;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 class AuthServices
 {
@@ -43,8 +46,9 @@ class AuthServices
                 DB::rollBack();
                 return $help->showMessageError(true, null, 'validation error', 401);
             }
-        }catch (\Exception $e){
-            throw new \HttpException($e->getMessage() , 401);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw new \HttpException($e->getMessage(), 401);
         }
     }
 
@@ -54,10 +58,10 @@ class AuthServices
         if ($credentials) {
             $token = auth()->attempt($credentials);
             if ($token) {
-                $status = User::query()->where('userID' , $request['userID'])->update([
+                $status = User::query()->where('userID', $request['userID'])->update([
                     'status' => User::STATUS_ACTIVE,
                 ]);
-                if ($status){
+                if ($status) {
                     return $this->createNewToken($token);
                 }
             }
@@ -85,33 +89,40 @@ class AuthServices
 
     public function edit(Request $request)
     {
-        $help = new helper();
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email|string',
-            'userID' => 'required|string',
-            'password' => 'required|string|min:6',
-            'role' => 'required|string|between:1,10',
-            'gender' => 'required',
-            'fullName' => 'required|string|min:2',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
-        }
-        $findUser = User::query()->where('userID', $request['userID'])->first();
-        if (!$findUser) {
-            return $help->showMessageError(false, 'userID', 'کاربر مورد نظر یافت نشد', 201);
-        }
-        $update = User::query()->where('userID', $request['userID'])->update([
-            'email' => $request['email'],
-            'fullName' => $request['fullName'],
-            'role' => $request['role'],
-            'gender' => $request['gender'],
-            'password' => bcrypt($request['password']),
-        ]);
-        if ($update) {
-            return $help->showMessageError(false, $update, 'کاربر با موفقیت در سامانه ثبت نام شد', 201);
-        } else {
-            return $help->showMessageError(true, null, 'validation error', 401);
+        try {
+            $help = new helper();
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|string',
+                'userID' => 'required|string',
+                'password' => 'required|string|min:6',
+                'role' => 'required|string|between:1,10',
+                'gender' => 'required',
+                'fullName' => 'required|string|min:2',
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()], 401);
+            }
+            $findUser = User::query()->where('userID', $request['userID'])->first();
+            if (!$findUser) {
+                return $help->showMessageError(false, 'userID', 'کاربر مورد نظر یافت نشد', 401);
+            }
+            $update = User::query()->where('userID', $request['userID'])->update([
+                'email' => $request['email'],
+                'fullName' => $request['fullName'],
+                'role' => $request['role'],
+                'gender' => $request['gender'],
+                'password' => bcrypt($request['password']),
+            ]);
+            DB::commit();
+            if ($update) {
+                return $help->showMessageError(false, $update, 'ویرایش کاربر با موفقیت انجام شد', 201);
+            } else {
+                DB::rollBack();
+                return $help->showMessageError(true, null, 'ویرایش کاربر با خطا مواجه شد!', 401);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw new HttpException(401, $e->getMessage());
         }
     }
 
@@ -124,4 +135,41 @@ class AuthServices
         }
         return response()->json(['token' => $newToken]);
     }
+
+    public function addUsers(AddUserRequest $request)
+    {
+        try {
+            $help = new helper();
+            $validated = $request->validated();
+            if ($validated->fails()) {
+                return response()->json(['error' => $validated->errors()], 401);
+            }
+            $findUser = DB::connection('mysql2')->table('users')->where('userID', $request->userID)->first();
+            if ($findUser) {
+                return $help->showMessageError(false, 'userID', 'کاربر مورد نظر در سامانه ثبت نام کرده است', 401);
+            }
+            $insert = DB::connection('mysql2')->table('users')->insert([
+                'userID' => $request->userID,
+                'api_token' => User::createToken(),
+                'name' => $request->name,
+                'lastname' => $request->lastname,
+                'address' => $request->address,
+                'gender' => $request->gender,
+                'telephone' => $request->telephone,
+            ]);
+            DB::commit();
+            if ($insert) {
+                return $help->showMessageError(false, $insert, 'کاربر با موفقیت در سامانه ثبت نام شد', 201);
+            } else {
+                DB::rollBack();
+                return $help->showMessageError(true, null, 'ثبت نام کاربر با خطا مواجه شد!', 401);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw new HttpException(401,$e->getMessage());
+        }
+    }
 }
+
+
+
