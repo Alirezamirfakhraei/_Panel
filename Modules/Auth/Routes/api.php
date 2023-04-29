@@ -16,13 +16,15 @@ use Modules\Auth\Http\Controllers\V1\SupportController;
 
 Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
     Route::controller(SupportController::class)->group(function () {
-        Route::post('support/register', 'register');
-        Route::post('support/login', 'login');
-        Route::post('support/logout', 'logout');
-        Route::get('support/refresh', 'refresh');
-        Route::get('support/profile', 'profile');
-        Route::post('support/user/edit', 'edit');
+        Route::post('support/admin/register', 'register');
+        Route::post('support/admin/login', 'login');
+        Route::post('support/admin/logout', 'logout');
+        Route::post('support/admin/edit', 'edit');
         Route::get('support/user/All', 'sendUsers');
         Route::post('support/user/add', 'addUsers');
+        Route::post('support/user/edit', 'editUsers');
+        Route::get('support/user/profile', 'profile');
+        Route::get('support/token/refresh', 'refresh');
+
     });
 });

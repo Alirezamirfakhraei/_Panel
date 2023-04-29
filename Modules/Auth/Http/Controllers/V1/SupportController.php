@@ -64,4 +64,9 @@ class SupportController extends Controller
     {
         return $this->repositories->sendAllUsers();
     }
+
+    public function editUsers()
+    {
+        return $this->services->editUsers();
+    }
 }

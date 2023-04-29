@@ -166,7 +166,48 @@ class AuthServices
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            throw new HttpException(401,$e->getMessage());
+            throw new HttpException(401, $e->getMessage());
+        }
+    }
+
+    public function editUsers(Request $request)
+    {
+
+        try {
+            $help = new helper();
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|string',
+                'userID' => 'required|string',
+                'password' => 'required|string|min:6',
+                'role' => 'required|string|between:1,10',
+                'gender' => 'required',
+                'fullName' => 'required|string|min:2',
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()], 401);
+            }
+            $findUser = DB::connection('mysql2')->table('users')->where('userID', $request->userID)->first();
+            if ($findUser) {
+                $update = DB::connection('mysql2')->table('users')->where('userID', $request->userID)->update([
+                    'userID' => $request->userID,
+                    'api_token' => User::createToken(),
+                    'name' => $request->name,
+                    'lastname' => $request->lastname,
+                    'address' => $request->address,
+                    'gender' => $request->gender,
+                    'telephone' => $request->telephone,
+                ]);
+                DB::commit();
+                if ($update) {
+                    return $help->showMessageError(false, $update, 'اطلاعات کاربر با موفقیت در سامانه تغییر یافت', 201);
+                } else {
+                    DB::rollBack();
+                    return $help->showMessageError(true, null, 'ویرایش کاربر با خطا مواجه شد!', 401);
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw new HttpException(401, $e->getMessage());
         }
     }
 }
