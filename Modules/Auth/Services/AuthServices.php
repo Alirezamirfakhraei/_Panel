@@ -54,29 +54,31 @@ class AuthServices
 
     public function login(Request $request)
     {
+        $user = '';
         $credentials = $request->only('userID', 'password');
         if ($credentials) {
             $token = auth()->attempt($credentials);
             if ($token) {
-                $status = User::query()->where('userID', $request['userID'])->update([
+                $user = User::query()->where('userID', $request['userID'])->update([
                     'status' => User::STATUS_ACTIVE,
                 ]);
-                if ($status) {
-                    return $this->createNewToken($token);
+                $resultArray = [];
+                if ($user) {
+                    return $this->createNewToken($token, $user);
                 }
             }
             return false;
         }
     }
 
-    public function createNewToken($token)
+    public function createNewToken($token, $user)
     {
         return response()->json([
+            'code' => 201,
             'message' => 'کاربر با موفقت وارد شد',
             'access_token' => $token,
-            'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => \auth()->user(),
+            'user' => $user,
         ]);
     }
 
@@ -85,45 +87,6 @@ class AuthServices
         $help = new helper();
         \auth()->logout();
         return $help->showMessageError(true, null, 'user logged out', 401);
-    }
-
-    public function edit(Request $request)
-    {
-        try {
-            $help = new helper();
-            $validator = Validator::make($request->all(), [
-                'email' => 'required|email|string',
-                'userID' => 'required|string',
-                'password' => 'required|string|min:6',
-                'role' => 'required|string|between:1,10',
-                'gender' => 'required',
-                'fullName' => 'required|string|min:2',
-            ]);
-            if ($validator->fails()) {
-                return response()->json(['error' => $validator->errors()], 401);
-            }
-            $findUser = User::query()->where('userID', $request['userID'])->first();
-            if (!$findUser) {
-                return $help->showMessageError(false, 'userID', 'کاربر مورد نظر یافت نشد', 401);
-            }
-            $update = User::query()->where('userID', $request['userID'])->update([
-                'email' => $request['email'],
-                'fullName' => $request['fullName'],
-                'role' => $request['role'],
-                'gender' => $request['gender'],
-                'password' => bcrypt($request['password']),
-            ]);
-            DB::commit();
-            if ($update) {
-                return $help->showMessageError(false, $update, 'ویرایش کاربر با موفقیت انجام شد', 201);
-            } else {
-                DB::rollBack();
-                return $help->showMessageError(true, null, 'ویرایش کاربر با خطا مواجه شد!', 401);
-            }
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw new HttpException(401, $e->getMessage());
-        }
     }
 
     public function refresh()
@@ -136,7 +99,7 @@ class AuthServices
         return response()->json(['token' => $newToken]);
     }
 
-    public function addUsers(AddUserRequest $request)
+    public function userAdd(AddUserRequest $request)
     {
         try {
             $help = new helper();
@@ -170,7 +133,8 @@ class AuthServices
         }
     }
 
-    public function editUsers(Request $request)
+
+    public function userEdit(Request $request)
     {
 
         try {

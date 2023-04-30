@@ -40,33 +40,29 @@ class SupportController extends Controller
         return $this->services->logout();
     }
 
-    public function edit(Request $request)
-    {
-        return $this->services->edit($request);
-    }
     public function refresh()
     {
         return $this->services->refresh();
     }
 
-    public function addUsers(AddUserRequest $request)
+    public function userAdd(AddUserRequest $request)
     {
-        return $this->services->addUsers( $request);
+        return $this->services->userAdd( $request);
     }
 
     //repository
-    public function profile()
+    public function userInfo()
     {
-        return $this->repositories->profile();
+        return $this->repositories->userInfo();
     }
 
-    public function sendUsers()
+    public function users()
     {
-        return $this->repositories->sendAllUsers();
+        return $this->repositories->users();
     }
 
-    public function editUsers()
+    public function userEdit(Request $request)
     {
-        return $this->services->editUsers();
+        return $this->services->userEdit($request);
     }
 }

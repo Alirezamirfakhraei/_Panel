@@ -8,7 +8,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthRepositories
 {
-    public function sendAllUsers()
+    public function users()
     {
         $connection = DB::connection('mysql2')->table('users')->get()->all();
         if ($connection != null) {
@@ -17,7 +17,7 @@ class AuthRepositories
         return false;
     }
 
-    public function profile()
+    public function userInfo()
     {
        return response()->json(\auth()->user());
     }
