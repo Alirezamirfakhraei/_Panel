@@ -4,6 +4,7 @@ namespace Modules\Auth\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Modules\Auth\Http\Requests\AddUserRequest;
 use Modules\Users\Models\User;
@@ -32,19 +33,19 @@ class AuthServices
             }
             $findUser = User::query()->where('userID', $request['userID'])->first();
             if ($findUser) {
-                return $help->showMessageError(true, 'userID', 'کاربر موردنظر قبلا در سامانه عضو شده است', 401);
+                return $help->showMessageError('UserNotFound', true, 'userID', 'کاربر موردنظر قبلا در سامانه عضو شده است', 401);
             }
             $findUser = User::query()->where('email', $request['email'])->first();
             if ($findUser) {
-                return $help->showMessageError(true, 'email', 'ایمیل موردنظر قبلا در سامانه ثبت شده است', 401);
+                return $help->showMessageError('UserNotFound', true, 'email', 'ایمیل موردنظر قبلا در سامانه ثبت شده است', 401);
             }
             $user = User::query()->create(array_merge($validator->validated(), ['password' => bcrypt($request->password)]));
             DB::commit();
             if ($user) {
-                return $help->showMessageError(false, ['userID' => $request->userID, 'gender' => $request->gender, 'fullName' => $request->fullName], 'کاربر با موفقیت در سامانه ثبت نام شد', 201);
+                return $help->showMessageError('Submit', false, ['userID' => $request->userID, 'gender' => $request->gender, 'fullName' => $request->fullName], 'کاربر با موفقیت در سامانه ثبت نام شد', 201);
             } else {
                 DB::rollBack();
-                return $help->showMessageError(true, null, 'validation error', 401);
+                return $help->showMessageError('NotInsertNewRecorde', true, null, 'validation error', 401);
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -52,41 +53,64 @@ class AuthServices
         }
     }
 
-    public function login(Request $request)
-    {
-        $user = '';
-        $credentials = $request->only('userID', 'password');
-        if ($credentials) {
-            $token = auth()->attempt($credentials);
-            if ($token) {
-                $user = User::query()->where('userID', $request['userID'])->update([
-                    'status' => User::STATUS_ACTIVE,
-                ]);
-                $resultArray = [];
-                if ($user) {
-                    return $this->createNewToken($token, $user);
+        public function login(Request $request)
+        {
+            DB::beginTransaction();
+            try {
+                $help = new helper();
+                if (!isset($request['userID']) || !$request['userID']) {
+                    return $help->showMessageError('ParameterNotSent', true, ['parameter' => 'userID'], 'نام کاربری وارد نشده است', 401);
                 }
+                if (!isset($request['password']) || !$request['password']) {
+                    return $help->showMessageError('ParameterNotSent', true, ['parameter' => 'password'], 'رمزعبور وارد نشده است', 401);
+                }
+                $username = User::query()->where('userID' , $request['userID'])->first();
+                if (!$username){
+                    return $help->showMessageError('ParameterNotFound', true, null, 'کاربر مورد نظر یافت نشد', 401);
+                }
+                $credentials = $request->only('userID', 'password');
+                if ($credentials) {
+                    $token = auth()->attempt($credentials);
+                    if (!Hash::check($request['password'], $username['password'])) {
+                        return $help->showMessageError('Wrong', true, null, 'نام کاربری یا رمز عبور اشتباه میباشد', 401);
+                    }
+                    if ($token) {
+                        $user = User::query()->where('userID', $request['userID'])->update([
+                            'status' => User::STATUS_ACTIVE,
+                        ]);
+                        DB::commit();
+                        if ($user) {
+                            return $this->createNewToken($token);
+                        }
+                        return false;
+                    }
+                    return false;
+                }else{
+                    return $help->showMessageError('IllogicalData', true, null, 'نام کاربری یا رمز عبور اشتباه میباشد', 401);
+                }
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw new HttpException(401, $e->getMessage());
             }
-            return false;
         }
-    }
 
-    public function createNewToken($token, $user)
+    public function createNewToken($token)
     {
-        return response()->json([
+        $result = [
             'code' => 201,
-            'message' => 'کاربر با موفقت وارد شد',
-            'access_token' => $token,
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => $user,
-        ]);
+            'error' => false,
+            'mode' => 'Submit',
+            'message' => 'کاربر با موفقیت وارد شد',
+            'data' => ['token' => $token, 'expires_in' => 18 * 60 *60 *1000]
+        ];
+        return response()->json($result);
     }
 
     public function logout()
     {
         $help = new helper();
         \auth()->logout();
-        return $help->showMessageError(true, null, 'user logged out', 401);
+        return $help->showMessageError('Submit', true, null, 'user logged out', 401);
     }
 
     public function refresh()
@@ -109,7 +133,7 @@ class AuthServices
             }
             $findUser = DB::connection('mysql2')->table('users')->where('userID', $request->userID)->first();
             if ($findUser) {
-                return $help->showMessageError(false, 'userID', 'کاربر مورد نظر در سامانه ثبت نام کرده است', 401);
+                return $help->showMessageError('Submit', false, 'userID', 'کاربر مورد نظر در سامانه ثبت نام کرده است', 401);
             }
             $insert = DB::connection('mysql2')->table('users')->insert([
                 'userID' => $request->userID,
@@ -122,10 +146,10 @@ class AuthServices
             ]);
             DB::commit();
             if ($insert) {
-                return $help->showMessageError(false, $insert, 'کاربر با موفقیت در سامانه ثبت نام شد', 201);
+                return $help->showMessageError('Submit', false, $insert, 'کاربر با موفقیت در سامانه ثبت نام شد', 201);
             } else {
                 DB::rollBack();
-                return $help->showMessageError(true, null, 'ثبت نام کاربر با خطا مواجه شد!', 401);
+                return $help->showMessageError('NotInsertNewRecorde', true, null, 'ثبت نام کاربر با خطا مواجه شد!', 401);
             }
         } catch (\Exception $e) {
             DB::rollBack();
@@ -163,10 +187,10 @@ class AuthServices
                 ]);
                 DB::commit();
                 if ($update) {
-                    return $help->showMessageError(false, $update, 'اطلاعات کاربر با موفقیت در سامانه تغییر یافت', 201);
+                    return $help->showMessageError('Submit', false, $update, 'اطلاعات کاربر با موفقیت در سامانه تغییر یافت', 201);
                 } else {
                     DB::rollBack();
-                    return $help->showMessageError(true, null, 'ویرایش کاربر با خطا مواجه شد!', 401);
+                    return $help->showMessageError('Submit', true, null, 'ویرایش کاربر با خطا مواجه شد!', 401);
                 }
             }
         } catch (\Exception $e) {

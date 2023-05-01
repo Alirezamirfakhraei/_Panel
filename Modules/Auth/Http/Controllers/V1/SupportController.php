@@ -4,12 +4,9 @@ namespace Modules\Auth\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Modules\Auth\Http\Requests\AddUserRequest;
 use Modules\Auth\Repositories\AuthRepositories;
 use Modules\Auth\Services\AuthServices;
-use Modules\Users\Models\User;
-use helper;
 
 class SupportController extends Controller
 {
@@ -51,14 +48,9 @@ class SupportController extends Controller
     }
 
     //repository
-    public function userInfo()
+    public function users(Request $request , $mode = null)
     {
-        return $this->repositories->userInfo();
-    }
-
-    public function users()
-    {
-        return $this->repositories->users();
+        return $this->repositories->users($request ,$mode);
     }
 
     public function userEdit(Request $request)

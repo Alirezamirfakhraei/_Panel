@@ -24,6 +24,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
         Route::post('support/user/edit', 'userEdit');
         Route::get('support/user/info', 'userInfo');
         Route::get('support/users', 'users');
+        Route::get('support/users/{mode}', 'users');
 
         Route::get('support/token/refresh', 'refresh');
     });
