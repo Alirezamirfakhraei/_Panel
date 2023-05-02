@@ -47,14 +47,20 @@ class SupportController extends Controller
         return $this->services->userAdd( $request);
     }
 
+    public function userEdit(Request $request)
+    {
+        return $this->services->userEdit($request);
+    }
+
+    public function userDelete(Request $request)
+    {
+        return $this->services->destroy($request);
+    }
+
     //repository
     public function users(Request $request , $mode = null)
     {
         return $this->repositories->users($request ,$mode);
     }
 
-    public function userEdit(Request $request)
-    {
-        return $this->services->userEdit($request);
-    }
 }

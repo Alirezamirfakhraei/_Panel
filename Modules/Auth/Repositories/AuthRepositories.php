@@ -5,25 +5,17 @@ namespace Modules\Auth\Repositories;
 use Illuminate\Support\Facades\DB;
 use helper;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Validator;
+use Modules\Users\Models\User;
 
 class AuthRepositories
 {
-
-    private function query($request)
+    private function query($userID)
     {
-        $validator = Validator::make($request->all(), [
-            'userID' => 'required|string',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
-        }
-        $users = DB::connection('mysql2')->table('users')->where('userID' , $userID)->first();
-        dd($users);
+        $user = DB::connection('mysql2')->table('users')->where('userID', $userID)->first();
+        return $user ? true : false;
     }
 
-
-    public function users(Request $request, $mode)
+    public function users($mode)
     {
         $help = new helper();
         $connection = DB::connection('mysql2')->table('users')->get()->all();
@@ -42,9 +34,6 @@ class AuthRepositories
                             'identifiCode' => $connection[$i]->identifiCode,
                         ];
                     }
-                } elseif ($mode == 'info') {
-                    $this->query($request);
-                    break;
                 } else {
                     $resultArray[$i] = [
                         'userID' => $connection[$i]->userID,

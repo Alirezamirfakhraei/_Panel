@@ -52,7 +52,6 @@
             return response()->json($result);
         }
 
-
         public function getData()
         {
             $post = null;

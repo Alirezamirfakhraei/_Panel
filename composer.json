@@ -29,7 +29,8 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\Users\\": "Modules/Users",
-            "Modules\\Auth\\": "Modules/Auth"
+            "Modules\\Auth\\": "Modules/Auth",
+            "Modules\\Cars\\": "Modules/Cars"
         },
         "files": [
             "Helper/Helper.php"
