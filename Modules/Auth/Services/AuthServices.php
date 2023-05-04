@@ -17,6 +17,7 @@ class AuthServices
 {
     public function register(Request $request)
     {
+        DB::beginTransaction();
         try {
             $help = new helper();
             $validator = Validator::make($request->all(), [
@@ -132,7 +133,7 @@ class AuthServices
             }
             $findUser = DB::connection('mysql2')->table('users')->where('userID', $request->userID)->first();
             if ($findUser) {
-                return $help->showMessageError('Submit', false, 'userID', 'کاربر مورد نظر در سامانه ثبت نام کرده است', 401);
+                return $help->showMessageError('DuplicateRegister', true, 'userID', 'کاربر مورد نظر در سامانه ثبت نام کرده است', 401);
             }
             $insert = DB::connection('mysql2')->table('users')->insert([
                 'userID' => $request->userID,

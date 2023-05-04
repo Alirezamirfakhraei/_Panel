@@ -19,5 +19,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
     Route::controller(CarsController::class)->group(function () {
         //admin
         Route::get('support/cars', 'cars');
+        Route::post('support/add/car', 'addCar');
     });
 });

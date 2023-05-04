@@ -2,6 +2,7 @@
 
 namespace Modules\Cars\Http\Controllers\V1;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Cars\Repositoreis\CarRepositories;
 use Modules\Cars\Services\CarServices;
@@ -24,9 +25,9 @@ class CarsController extends Controller
         return $this->repositories->cars();
     }
 
-    public function addCar()
+    public function addCar(Request $request)
     {
-
+    return $this->services->addCar($request);
     }
 
     public function editCar()

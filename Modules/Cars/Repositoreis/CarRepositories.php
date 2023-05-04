@@ -3,10 +3,7 @@
 namespace Modules\Cars\Repositoreis;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use Modules\Cars\Models\Cars;
-use helper;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 class CarRepositories
 {
