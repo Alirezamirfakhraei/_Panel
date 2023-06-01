@@ -80,7 +80,7 @@ class AuthServices
                     ]);
                     DB::commit();
                     if ($user) {
-                        return $this->createNewToken($token);
+                        return view('index');
                     }
                     return false;
                 }
@@ -93,6 +93,7 @@ class AuthServices
             throw new HttpException(401, $e->getMessage());
         }
     }
+
 
     public function createNewToken($token)
     {

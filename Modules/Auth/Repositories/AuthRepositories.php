@@ -15,7 +15,7 @@ class AuthRepositories
         return $user ? true : false;
     }
 
-    public function users($mode)
+    public function users($mode = null)
     {
         $help = new helper();
         $connection = DB::connection('mysql2')->table('users')->get()->all();

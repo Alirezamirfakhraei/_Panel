@@ -16,9 +16,13 @@ class SupportController extends Controller
 
     public function __construct(AuthRepositories $repositories , AuthServices $services)
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
         $this->repositories = $repositories;
         $this->services = $services;
+    }
+
+    public function test()
+    {
+        return view('auth::index');
     }
 
     //service and operation
@@ -58,9 +62,9 @@ class SupportController extends Controller
     }
 
     //repository
-    public function users(Request $request , $mode = null)
+    public function users(Request $request , $mode)
     {
-        return $this->repositories->users($request ,$mode);
+        return $this->repositories->users($request , $mode);
     }
 
 }

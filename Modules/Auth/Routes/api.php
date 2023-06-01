@@ -13,7 +13,6 @@ use Modules\Auth\Http\Controllers\V1\SupportController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::group(['middleware' => 'api', 'prefix' => 'v1'], function ($router) {
     Route::controller(SupportController::class)->group(function () {
         //admin
