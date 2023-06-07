@@ -57,6 +57,11 @@ class User extends Authenticatable implements JWTSubject
     public const STATUS_INACTIVE = 'inactive';
     public static array $status = [self::STATUS_ACTIVE , self::STATUS_INACTIVE];
 
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_SUPER_ADMIN= 'super_admin';
+    public const ROLE_CUSTOMER = 'customer';
+    public static array $roles = [self::STATUS_ACTIVE , self::STATUS_INACTIVE];
+
 
     public static function createToken($codeLength = 50)
     {
@@ -75,6 +80,7 @@ class User extends Authenticatable implements JWTSubject
         // auto-sets values on creation
         static::creating(function ($query) {
             $query->status = self::STATUS_INACTIVE;
+            $query->role = self::STATUS_INACTIVE;
         });
     }
 
