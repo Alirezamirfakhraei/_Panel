@@ -133,12 +133,7 @@ body {
     font-weight: 600;
     border-radius: 30px;
 }
-.loginWrapper .logincard .rightbox input:hover, .loginWrapper .logincard .rightbox input:focus, .loginWrapper .logincard .rightbox input:active {
-    background: linear-gradient(15deg, #b9a01d, #fec42b);
-    border: 2px solid #fff;
-    outline: 0 none;
-    box-shadow: none !important;
-}
+
 
 @media only screen and (max-width: 991px) {
     .loginWrapper .logincard {

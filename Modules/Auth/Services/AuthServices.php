@@ -3,10 +3,12 @@
 namespace Modules\Auth\Services;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Modules\Auth\Http\Requests\AddUserRequest;
+use Modules\Repairs\Models\Repair;
 use Modules\Users\Models\User;
 use helper;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -15,14 +17,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthServices
 {
-    protected function validate(array $data)
-    {
-        return Validator::make($data, [
-            'userID' => ['required', 'string', 'min:11', 'max:11', 'exists:users'],
-            'password' => ['required', 'string', 'min:8', 'max:8'],
-        ]);
-    }
-
 
     public function store(Request $request)
     {
@@ -35,12 +29,46 @@ class AuthServices
             if (!isset($request['password']) || !$request['password']) {
                 return $help->showMessageError('ParameterNotSent', true, ['parameter' => 'password'], 'رمزعبور وارد نشده است', 401);
             }
-
-
+            $request->validate([
+                'userID' => 'required|string|max:250',
+                'password' => 'required|min:8'
+            ]);
+            User::query()->create([
+                'userID' => $request->userID,
+                'password' => Hash::make($request->password)
+            ]);
+            DB::commit();
+            $credentials = $request->only('email', 'password');
+            Auth::attempt($credentials);
+            $request->session()->regenerate();
+            return redirect()->route('admin')->with('You have successfully registered & logged in!');
         } catch (\Exception $e) {
             DB::rollBack();
             throw new HttpException(401, $e->getMessage());
         }
+    }
+
+    public function authenticate(Request $request)
+    {
+        $username = User::query()->where('userID', $request['userID'])->first();
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $credentials = $request->only('email', 'password');
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+            return redirect()->route('admin')->with('You have successfully logged in!');
+        }
+        if (!$username || !Hash::check($request['password'], $username['password'])) {
+            return 'نام کاربری یا رمز عبور اشتباه میباشد';
+        } else {
+            $request->session()->regenerate();
+            auth()->loginUsingId($username['tradeID']);
+            return 'ok';
+        }
+
+
     }
 
 

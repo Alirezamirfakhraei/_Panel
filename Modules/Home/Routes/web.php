@@ -12,9 +12,10 @@ use Modules\Home\Http\Controllers\HomeController;
 |
 */
 
-Route::group(['middleware' => 'auth' , 'prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin'], function () {
     Route::controller(HomeController::class)->group(function () {
         //admin
         Route::get('', 'index');
+        Route::get('notFound', 'notFoundUrl');
     });
 });

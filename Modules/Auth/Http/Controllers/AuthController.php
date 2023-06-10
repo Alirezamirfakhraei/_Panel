@@ -3,6 +3,7 @@
 namespace Modules\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Modules\Auth\Repositories\AuthRepositories;
 use Modules\Auth\Services\AuthServices;
@@ -29,23 +30,28 @@ class AuthController extends Controller
     return $this->services->store($request);
     }
 
+    public function authenticate(Request $request)
+    {
+        return $this->services->authenticate($request);
+    }
+
     public function show(User $user)
     {
-        //
+
     }
 
     public function edit(User $user)
     {
-        //
+
     }
 
     public function update(Request $request, User $user)
     {
-        //
+
     }
 
     public function destroy(User $user)
     {
-        //
+
     }
 }

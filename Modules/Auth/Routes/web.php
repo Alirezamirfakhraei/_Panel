@@ -15,8 +15,9 @@ use Modules\Auth\Http\Controllers\AuthController;
 */
 Route::group(['prefix' => 'admin'], function () {
     Route::controller(AuthController::class)->group(function () {
-        //admin
+        //view login
         Route::get('sign-in', 'login');
-        Route::post('login', 'store')->name('admin.login');
+        //login method
+        Route::post('login', 'authenticate')->name('admin.login');
     });
 });
