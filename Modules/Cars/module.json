@@ -1,0 +1,15 @@
+{
+    "name": "Cars",
+    "alias": "cars",
+    "description": "cars panel admin",
+    "keywords": ["cars"],
+    "priority": 1,
+    "providers": [
+        "Modules\\Cars\\Providers\\CarsServiceProvider"
+    ],
+    "files": [],
+    "title": "cars",
+    "version":"1.0.0",
+    "compatibility": "",
+    "author": "Alireza Mirfakhraei"
+}
