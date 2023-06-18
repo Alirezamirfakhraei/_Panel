@@ -33,7 +33,7 @@ class AuthServices
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        $credentials = $request->only('userID', 'password');
+        $credentials = $request->only('userID', 'email','password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
         return redirect()->route('home.index');
