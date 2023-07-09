@@ -15,11 +15,16 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
+                    @if(session()->exists('Success'))
+                        <div class="alert alert-success" role="alert">
+                            {{session('Success')}}
+                        </div>
+                    @endif
                     <div class="rightbox text-center">
                         <img src="<?=asset('assets/images/pages/512.png') ?>" class="rounded-circle"
                              alt="profile image">
                         <p>ورود به پنل <span style="color: #f0ca45">اسکارپین</span> (ادمین)</p>
-                        <form action="<?= route('admin.authenticate')?>" method="POST">
+                        <form action="<?= route('admin.authenticate')?>" method="post">
                             @csrf
                             <input required type="text" name="userID" id="userID"
                                    value="{{ old('userID') }}"

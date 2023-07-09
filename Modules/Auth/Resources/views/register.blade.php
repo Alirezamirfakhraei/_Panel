@@ -15,6 +15,13 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
+                    <div class="container text-center mt-2">
+                        @if(session()->exists('Success'))
+                            <div class="alert alert-success" role="alert">
+                                {{session('Success')}}
+                            </div>
+                        @endif
+                    </div>
                     <div class="rightbox text-center">
                         <img src="<?=asset('assets/images/pages/512.png') ?>" class="rounded-circle"
                              alt="profile image">
@@ -32,7 +39,7 @@
                             <input required type="text" name="userID" id="userID"
                                    value="{{ old('userID') }}"
                                    class="form-control text-center @error('userID') is-invalid @enderror"
-                                   placeholder="نام کاربری"
+                                   placeholder="شماره همراه"
                                    aria-describedby="prefixId">
                             @if (Session::has('msg'))
                                 <div class="alert alert-danger">{{ Session::get('msg') }}</div>
@@ -48,7 +55,7 @@
                                 <label for="abc"></label></p>
                             <input type="submit" class="btn btn-primary" value="ورود">
                             <p>
-                                <a href="#">ورود با شماره تلفن همراه و کد تایید</a>
+                                <a href="{{route('auth.login')}}">ورود به پنل ادمین</a>
                             </p>
                         </form>
                     </div>

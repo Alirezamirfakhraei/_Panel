@@ -7,36 +7,27 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Mockery\Exception;
 use Modules\Users\Models\User;
 use helper;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 
 class AuthServices
 {
-
     private function showMessage($mode , $message)
     {
-        return session()->flash($mode , $message);
+         session()->flash($mode , $message);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'userID' => 'required|digits:11',
-            'email' => 'required|unique:users',
-            'password' => 'required|min:8'
-        ]);
-        User::query()->create([
-            'userID' => $request['userID'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-        ]);
-        $credentials = $request->only('userID', 'email','password');
-        Auth::attempt($credentials);
-        $request->session()->regenerate();
-        return redirect()->route('home.index');
+        $user = new User();
+        $user->userID = $request->userID;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->saveOrFail();
+        return redirect()->route('auth.login')->with('Success' , 'ثببت نام با موفقیت انجام شد');
     }
 
 
@@ -47,12 +38,7 @@ class AuthServices
             $this->showMessage('msg' , 'نام کاربری نامعتبر');
             return redirect()->back();
         }
-        $credentials = $request->only('userID' , 'password');
-        if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
-            return redirect()->route('admin')->with('You have successfully logged in!');
-        }
-        if (!$admin || !Hash::check($request['password'], $admin['password'])) {
+        if (!Hash::check($request['password'], $admin['password'])) {
             return 'نام کاربری یا رمز عبور اشتباه میباشد';
         } else {
             $request->session()->regenerate();

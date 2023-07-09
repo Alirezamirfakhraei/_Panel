@@ -16,7 +16,7 @@ use Modules\Auth\Http\Controllers\AuthController;
 Route::group(['prefix' => 'admin'], function () {
     Route::controller(AuthController::class)->group(function () {
         //view login and register admin
-        Route::get('login', 'login');
+        Route::get('login', 'login')->name('auth.login');
         Route::get('register', 'register');
         //login and register method
         Route::post('/authenticate', 'authenticate')->name('admin.authenticate');

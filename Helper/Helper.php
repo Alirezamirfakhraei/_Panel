@@ -52,4 +52,13 @@
                 return false;
             }
         }
+
+        public function create($title, $message, $level, $key = 'flash_message')
+        {
+            return session()->flash($key, [
+                'title'    =>   $title,
+                'message'  =>   $message,
+                'level'     =>  $level
+            ]);
+        }
     }

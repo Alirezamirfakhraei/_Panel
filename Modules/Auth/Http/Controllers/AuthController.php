@@ -4,6 +4,7 @@ namespace Modules\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\Auth\Http\Requests\CreateUserRequest;
 use Modules\Auth\Repositories\AuthRepositories;
 use Modules\Auth\Services\AuthServices;
 use Modules\Users\Models\User;
@@ -29,7 +30,7 @@ class AuthController extends Controller
         return view('auth::register');
     }
 
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
         return $this->services->store($request);
     }

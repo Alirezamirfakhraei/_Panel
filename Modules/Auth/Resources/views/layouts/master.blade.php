@@ -10,5 +10,6 @@
 @yield('content')
 <!-- #END# body -->
 @include('auth::section.js') {{-- Load JS File --}}
+
 </body>
 </html>
