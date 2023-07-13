@@ -1,8 +1,14 @@
+@font-face {
+    font-family: 'SDF';
+    src: url('../fonts/iransans/IRANSans-Light-web.woff') format('woff'), url('../fonts/iransans/IRANSans-Light-web.ttf') format('truetype');
+    font-weight: normal;
+}
+
 body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    font-family: "2  Bardiya", sans-serif;
+    font-family: "SDF", sans-serif;
     font-size: 16px !important;
 }
 

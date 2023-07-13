@@ -25,33 +25,6 @@ class AuthController extends Controller
         return view('auth::login');
     }
 
-    public function store(Request $request)
-    {
-    return $this->services->store($request);
-    }
 
-    public function authenticate(Request $request)
-    {
-        return $this->services->authenticate($request);
-    }
 
-    public function show(User $user)
-    {
-
-    }
-
-    public function edit(User $user)
-    {
-
-    }
-
-    public function update(Request $request, User $user)
-    {
-
-    }
-
-    public function destroy(User $user)
-    {
-
-    }
 }

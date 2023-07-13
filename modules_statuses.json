@@ -1,7 +1,4 @@
 {
-    "Users": true,
-    "Blog": true,
-    "Auth": true,
-    "Cars": true,
-    "Home": true
+    "Home": true,
+    "Auth": true
 }

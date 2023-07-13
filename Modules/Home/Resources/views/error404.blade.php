@@ -12,7 +12,7 @@
                     <div class="clip"><div class="shadow"><span class="digit thirdDigit"></span></div></div>
                     <div class="clip"><div class="shadow"><span class="digit secondDigit"></span></div></div>
                     <div class="clip"><div class="shadow"><span class="digit firstDigit"></span></div></div>
-                    <div class="msg">OH!<span class="triangle"></span></div>
+                    <div class="msg">OH<span class="triangle"></span></div>
                 </div>
                 <h2 class="h1">متاسفیم ! صفحه ی درخواستی شما پیدا نشد</h2>
                 <a href="<?= url('admin') ?>" class="h1">داشبود</a>
