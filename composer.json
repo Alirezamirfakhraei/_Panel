@@ -46,7 +46,9 @@
             "Mlk\\Repairs\\": "Modules/Mlk/Repairs/"
         },
         "files": [
-            "Modules/Mlk/Share/helpers.php"
+            "Modules/Mlk/Share/helpers.php",
+            "Helper/Helper.php",
+            "Helper/Functions.php"
         ]
     },
     "autoload-dev": {

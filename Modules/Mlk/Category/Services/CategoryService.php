@@ -23,6 +23,7 @@ class CategoryService
     {
         return Category::query()->whereId($id)->update([
             'user_id' => auth()->id(),
+            'user_id' => auth()->id(),
             'parent_id' => $request->parent_id,
             'title' => $request->title,
             'slug' => $this->makeSlug($request->title),

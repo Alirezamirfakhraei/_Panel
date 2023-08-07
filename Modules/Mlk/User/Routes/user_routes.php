@@ -2,21 +2,29 @@
 
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
+use Mlk\User\Http\Controllers\Main\UserController;
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], static function ($router) {
-    $router->get('users', 'UserController@index')->name('users.all');
-    $router->get('users/add/{userId}/role', 'UserController@addRole')->name('users.add.role');
-    $router->post('users/add/{userId}/role', 'UserController@addRoleStore')->name('users.add.role.store');
-    $router->delete('users/remove/{userId}/role/{roleId}', 'UserController@removeRole')->name('users.remove.role');
-
-    $router->resource('users', 'UserController', ['except' => 'show']);
+    Route::controller(UserController::class)->group(function () {
+        Route::get('users/add/{userId}/role', 'addRole')->name('users.add.role');
+        Route::post('users/add/{userId}/role', 'addRoleStore')->name('users.add.role.store');
+        Route::delete('users/remove/{userId}/role/{roleId}', 'removeRole')->name('users.remove.role');
+        Route::resource('users', 'UserController', ['except' => 'show']);
+    });
 });
 
-Route::group(['namespace' => 'Home'], static function ($router) {
-    $router->get('authors', 'UserController@authors')->name('users.authors');
-    $router->get('authors/{name}', 'UserController@author')->name('users.author');
-    $router->get('profile', 'UserController@profile')->name('users.profile')->middleware('auth');
-    $router->patch('profile', 'UserController@updateProfile')->name('users.update.profile')->middleware('auth');
+Route::group(['namespace' => 'Main', 'middleware' => 'auth', 'prefix' => 'admin'], static function ($router) {
+    //register user
+    Route::get('users/create', 'UserController@create')->name('users.create');
+    Route::post('users/create', 'UserController@store')->name('users.store');
+    //all users
+    Route::get('users', 'UserController@index')->name('users.index');
+    //edit user
+    Route::get('users/{id}', 'UserController@edit')->name('users.edit');
+//    Route::match(['put', 'UserController@patch'], 'users/{id}', 'update')->name('users.update');
+    //delete user
+    Route::delete('users/remove/{id}', 'UserController@destroy')->name('users.destroy');
+
 
     $router->get('send/email', static function () {
         dispatch(new Mlk\User\Jobs\SendEmailToUserJob('milwad@gmail.com'));
@@ -24,8 +32,7 @@ Route::group(['namespace' => 'Home'], static function ($router) {
         return 'send';
     });
     $router->get('send/notifications', static function () {
-       Notification::send(auth()->user(), new Mlk\User\Notifications\SendEmailToUserNotification);
-
+        Notification::send(auth()->user(), new Mlk\User\Notifications\SendEmailToUserNotification);
         return 'notif';
     });
     $router->get('mark/notifications', static function () {
@@ -39,4 +46,5 @@ Route::group(['namespace' => 'Home'], static function ($router) {
 
         return 'event fired';
     });
+
 });

@@ -2,6 +2,7 @@
 
 namespace Mlk\User\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Mlk\Role\Repositories\RoleRepo;
 use Mlk\Share\Http\Controllers\Controller;
 use Mlk\User\Http\Requests\AddRoleRequest;
@@ -13,12 +14,6 @@ use Mlk\User\Services\UserService;
 
 class UserController extends Controller
 {
-    // SOLID
-    // S => Single Responsibility Principle
-    //    public function show($id)
-    //    {
-    //        abort(404);
-    //    }
 
     public UserRepo $repo;
     public UserService $service;
@@ -46,15 +41,13 @@ class UserController extends Controller
     {
         $this->authorize('index', User::class);
         $this->service->store($request);
-
         return to_route('users.index');
     }
 
     public function edit($id)
     {
-        $this->authorize('index', User::class);
+//        $this->authorize('index', User::class);
         $user = $this->repo->findById($id);
-
         return view('User::edit', compact('user'));
     }
 
@@ -62,7 +55,12 @@ class UserController extends Controller
     {
         $this->authorize('index', User::class);
         $this->service->update($request, $id);
-
+        return to_route('users.index');
+    }
+    public function updateUsers(Request $request, $id)
+    {
+//      $this->authorize('index', User::class);
+        $this->service->updateUsers($request, $id);
         return to_route('users.index');
     }
 
@@ -70,7 +68,6 @@ class UserController extends Controller
     {
         $this->authorize('index', User::class);
         $this->repo->delete($id);
-
         return to_route('users.index')->with(['success_delete' => 'کاربر با موفقیت حذف شد']);
     }
 
@@ -79,7 +76,6 @@ class UserController extends Controller
     {
         $this->authorize('index', User::class);
         $roles = $roleRepo->index()->get();
-
         return view('User::add-roles', compact(['user_id', 'roles']));
     }
 
@@ -88,7 +84,6 @@ class UserController extends Controller
         $this->authorize('index', User::class);
         $user = $this->repo->findById($userId);
         $this->service->addRole($request->role, $user);
-
         alert()->success('اد کردن مقام به کاربر', 'عملیات با موفقیت انجام شد');
         return to_route('users.index');
     }
@@ -96,12 +91,9 @@ class UserController extends Controller
     public function removeRole($userId, $roleId, RoleRepo $roleRepo)
     {
         $this->authorize('index', User::class);
-
         $user = $this->repo->findById($userId);
         $role = $roleRepo->findById($roleId);
-
         $this->service->deleteRole($user, $role->name);
-
         alert()->success('حذف کردن مقام', 'عملیات با موفقیت انجام شد');
         return to_route('users.index');
     }

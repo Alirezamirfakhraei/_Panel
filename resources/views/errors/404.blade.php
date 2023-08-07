@@ -7,7 +7,7 @@
 
         <title>خطای 404 - صفحه یافت نشد</title>
 
-        @include('Home::section.css')
+        @include('Panel::section.css')
     </head>
     <body>
         <div id="preloader-active">
@@ -42,6 +42,6 @@
             </main>
         </div>
         <div class="dark-mark"></div>
-        @include('Home::section.js')
+        @include('Panel::section.js')
     </body>
 </html>

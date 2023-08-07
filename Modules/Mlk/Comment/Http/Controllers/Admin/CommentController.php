@@ -29,7 +29,6 @@ class CommentController extends Controller
     {
         $this->authorize('manage', $this->class);
         $this->repo->delete($id);
-
         toast('حذف کامنت','success');
         return to_route('comments.index');
     }

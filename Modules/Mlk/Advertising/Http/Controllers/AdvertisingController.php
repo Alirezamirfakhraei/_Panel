@@ -43,7 +43,6 @@ class AdvertisingController extends Controller
 
         [$imageName, $imagePath] = ShareService::uploadImage($request->file('image'), null);
         $this->service->store($request, $imagePath, $imageName);
-
         ShareRepo::successMessage('ساخت تبیلغات');
         return to_route('advertisings.index');
     }

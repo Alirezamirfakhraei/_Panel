@@ -2,6 +2,7 @@
 
 namespace Mlk\User\Services;
 
+use Illuminate\Support\Facades\DB;
 use Mlk\User\Models\User;
 
 class UserService
@@ -24,6 +25,8 @@ class UserService
             'password' => bcrypt($request->password),
         ]);
     }
+
+
 
     public function addRole($role, $user)
     {

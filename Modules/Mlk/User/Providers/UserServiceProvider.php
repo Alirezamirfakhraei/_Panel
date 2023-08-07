@@ -17,6 +17,7 @@ class UserServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views/', 'User');
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/Lang');
 
         Route::middleware('web')->namespace('Mlk\User\Http\Controllers')->group(__DIR__ . '/../Routes/user_routes.php');
         Gate::policy(User::class, UserPolicy::class);

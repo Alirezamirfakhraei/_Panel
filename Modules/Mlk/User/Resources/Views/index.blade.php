@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <div class="card-box">
                     <div class="float-right">
-                        <a href="{{ route('users.create') }}" class="arrow-none btn btn-primary text-white" aria-expanded="false">
+                        <a href="{{route('users.create')}}" class="arrow-none btn btn-primary text-white" aria-expanded="false">
                             ساخت کاربر جدید
                         </a>
                     </div>
@@ -37,9 +37,9 @@
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $user->userID }}</td>
                                         <td>{{ $user->sync_at }}</td>
-                                        <td>{{ $user->role }}</td>
-                                        <td>{{ $user->name.''.$user->lastname}}</td>
-                                        <td>{{ jdate($user->created_at)}}</td>
+                                        <td class="badge badge-primary mt-2"> @lang($user->role) </td>
+                                        <td>{{ $user->name.' '.$user->lastname}}</td>
+                                        <td>{{ explode(' ' , jdate($user->created_at))[0]}}</td>
                                         <td>
                                             <div class="row">
                                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">
