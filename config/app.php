@@ -195,6 +195,8 @@ return [
         Mlk\Comment\Providers\CommentServiceProvider::class,
         Mlk\Share\Providers\ShareServiceProvider::class,
         Mlk\Advertising\Providers\AdvertisingServiceProvider::class,
+        Anetwork\Validation\PersianValidationServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

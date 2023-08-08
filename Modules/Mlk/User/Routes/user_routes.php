@@ -20,8 +20,8 @@ Route::group(['namespace' => 'Main', 'middleware' => 'auth', 'prefix' => 'admin'
     //all users
     Route::get('users', 'UserController@index')->name('users.index');
     //edit user
-    Route::get('users/{id}', 'UserController@edit')->name('users.edit');
-//    Route::match(['put', 'UserController@patch'], 'users/{id}', 'update')->name('users.update');
+    Route::get('users/edit/{id}', 'UserController@edit')->name('users.edit');
+    Route::match(['put', 'patch'], 'users/edit/{id}', 'UserController@update')->name('users.update');
     //delete user
     Route::delete('users/remove/{id}', 'UserController@destroy')->name('users.destroy');
 
@@ -37,7 +37,6 @@ Route::group(['namespace' => 'Main', 'middleware' => 'auth', 'prefix' => 'admin'
     });
     $router->get('mark/notifications', static function () {
         auth()->user()->unreadNotifications->markAsRead();
-
         \Mlk\Share\Repositories\ShareRepo::successMessage(title: 'پیام ها با موفقیت خوانده شد');
         return back();
     })->name('mark.notifications');

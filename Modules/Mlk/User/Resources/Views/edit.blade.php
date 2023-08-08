@@ -71,7 +71,7 @@
                                         <div class="col-sm-10">
                                             <input type="text"
                                                    class="form-control @error('national_code') is-invalid @enderror"
-                                                   id="national_code" name="national_code"
+                                                   value="{{ $user->national_code }}" id="national_code" name="national_code"
                                                    placeholder="کدملی کاربر را وارد کنید">
                                             @error('national_code')
                                             <br>
@@ -84,7 +84,7 @@
                                         <div class="col-sm-10">
                                             <input type="text"
                                                    class="form-control @error('address') is-invalid @enderror"
-                                                   id="address" name="address" placeholder="آدرس کاربر را وارد کنید">
+                                                   value="{{ $user->address }}" id="address" name="address" placeholder="آدرس کاربر را وارد کنید">
                                             @error('address')
                                             <br>
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -96,7 +96,7 @@
                                         <div class="col-sm-10">
                                             <input type="text"
                                                    class="form-control @error('telephone') is-invalid @enderror"
-                                                   id="telephone" name="telephone"
+                                                   value="{{ $user->telephone }}" id="telephone" name="telephone"
                                                    placeholder="تلفن کاربر را وارد کنید">
                                             @error('telephone')
                                             <br>
