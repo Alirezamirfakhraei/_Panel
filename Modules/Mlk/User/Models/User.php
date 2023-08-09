@@ -32,7 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
         parent::boot();
         // auto-sets values on creation
         static::creating(function ($query) {
-            $query->status = self::STATUS_ACTIVE;
+            $query->status = self::STATUS_INACTIVE;
             $query->role = 'admin';
         });
     }

@@ -18,6 +18,6 @@ class RegisterController extends Controller
     {
         $user = $registerService->generateUser($request);
         auth()->loginUsingId($user->id);
-        return redirect()->route('auth.login');
+        return redirect()->route('login');
     }
 }

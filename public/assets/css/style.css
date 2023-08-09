@@ -2240,4 +2240,10 @@ pre {
     height: 250px !important;
     width: 340px !important;
 }
+.codepen-wrapper {
+    width: 250px;
+    margin: 0 auto;
+}
+
+
 

@@ -8,114 +8,25 @@ use Illuminate\Support\Facades\Response;
 class helper
 {
     // ------> General CONST:
-    public const API_VERSION = 1;
     public const SPLIT_SYMBOL = "|";
     public const SPLIT_SYMBOL_DATE = "-";
-    public const REPAIRSHOPNAME = "اتوسرویس";
-    public const GARAGE = "تعمیرگاه";
-
-    // ------> [TRUE] General:
-    public const CarDestroyed = 'خودرو با موفقیت حذف شد';
-    public const ServiceCanceled = 'سرویس با موفقیت لغو شد';
+    // ------> [TRUE]
     public const SubmitRequest = 'عملیات با موفقیت انجام شد';
     public const Submit = 'اطلاعات با موفقیت ثبت شد';
-    public const SubmitCompleteInfo = 'اطلاعات خودرو با موفقیت ثبت شد';
-    public const ServiceRegistration = 'سرویس با موفقیت ثبت شد';
-    public const SendCodeForResetPassword = 'کد تایید برای بازیابی رمز عبور ارسال شد';
-    public const AddNewUserByRepair = 'کاربر با موفقیت ثبت شد';
-    public const AddNewCar = 'خوردو با موفقیت ثبت شد';
-    public const SendCodeForUser = 'کد تایید با موفقیت ارسال شد';
-    public const ServicePieceRegistration = 'سرویس قطعه با موفقیت ثبت شد';
-    public const TicketRegistration = 'تیکت با موفقیت ثبت شد';
-    public const UpdateKmCurrentSubmit = 'کیلومتر فعلی خودرو با موفقیت به روز رسانی شد';
-
-    // ------> [FALSE] General:
-    public const QueryFailed = 'عملیات مربوطه انجام نشد، دوباره امتحان کنید';
-    public const WrongParameter = 'پارامتر ارسالی اشتباه است ، لطفا در وارد کردن اطلاعات دقت فرمائید!';
-    public const ServicesNotFoundParameter = 'سرویسی برای خودرو توسظ تعمیرگاه ثبت نشده است';
-    public const ServicesWorkerExistsParameter = 'سرویس جاری برای تعمیرکار وحود دارد';
-    public const CarNotDestroyed = 'این خودرو قابل حذف نمیباشد!';
-    public const FreeCar = 'خودرو از حالت مالیکت خارج شد';
-    public const InfoNotRecordeOnService = 'رکوردی برای این شناسه ماشین ثبت نشده است! بار اول مراجعه این خودرو می باشد';
-    public const IllogicalData = 'مقادیر نا معقولی وارد شده است، از صحت اطلاعات اطمینان حاصل فرمایید';
-    public const IsValid = 'مقادیر نامعلوم وارد شده است، لطفا بعد از تاییدیه تعیرکار مقادیر را ارسال کنید!';
     public const Wrong = 'پارامتر ارسالی اشتباه است!';
     public const NotInsertNewRecorde = 'عدم ذخیره اطلاعات!';
-    public const IncompatibilityData = 'عدم تطابق!';
-    public const ReferenceModeEnded = 'درخواست خاتمه یافته است!';
-    public const AccessDenied = 'دسترسی امکان پذیر نمی باشد.';
-    public const AccessDeniedStatusRepair = 'تعمیرکار در وضعیت تایید قرار ندارد!';
-    public const Could_Not_Uploaded = 'عکس آپلود نشد دوباره امتحان کنید';
-    public const ExpireToken = 'کد وارد شده منقضی شده است.';
-    public const Error = 'مشکلی پیش آمده است، لطفا چند دقیقه بعد مجدد اقدام کنید';
-    public const ErrorContactWithSupp = 'مشکلی پیش آمده است، لطفا با پشتیبانی تماس بگیرید';
-    public const ProcessAgain = 'سرویس این خودرو به پایان رسید، لطفا دوباره درخواست را اجر کنید';
-    public const IncorrectReferenceId = 'کد مرجع کاربر برای عملیات مربوطه اشتباه مباشد!';
-    public const FullWorkerCapacity = 'ظرفیت سرویس کاران خالی نمی باشد!';
-
-    //------> [FALSE] NotSendParameter
-    public const ParameterNotSend = 'پارامتر مربوطه  ارسال نشد!';
+    public const WelcomeToPanel = 'به پنل اسکارپین خوش امدید';
+    //------> [FALSE]
+    public const WrongData = 'نام کاربری یا رمز عبور اشتباه میباشد';
+    public const ParameterNotSend = 'پارامتر مربوطه  ارسال نشد';
+    public const UserNotActive = 'کاربر غیرفعال میباشد';
     public const UserIDNotSend = 'شماره موبایل وارد نشده است';
-    public const RepairIDNotSend = 'شناسه صنفی وارد نشده است';
-    public const PasswordNotSend = 'رمزعبور وارد نشده است';
-    public const TokenNotSend = 'توکن وارد نشده است';
-    public const NationalCodeNotSend = 'کد ملی وارد نشده است';
-    public const YearNotSend = 'سال خودرو وارد نشده است';
-    public const PlateNotSend = 'پلاک خودرو وارد نشده است';
-    public const EngineNumberNotSend = 'شماره موتور وارد نشده است';
-    public const ChassisNumberNotSend = 'شماره موتور وارد نشده است';
-    public const CompanyNotSend = 'برند خودرو وارد نشده است';
-    public const ModelNotSend = 'مدل خودرو وارد نشده است';
-    public const KmCurrentNotSend = 'کیلومتر فعلی خودرو وارد نشده است';
-    public const CategoryNotSend = 'دسته بندی خودرو وارد نشده است';
-    public const DateInsuranceNotSend = 'تاریخ بیمه شخص ثالث وارد نشده است';
-    public const KmReplaceNotSend = 'کیلومتر سرویس خودرو وارد نشده است';
-    public const WrongKmReplaceNotSend = 'کیلومتر وارد نشده است';
-    public const CodeNotSend = 'کد وارد نشده است';
-    public const CarIDNotSend = 'کد وارد نشده است';
-    public const TypeNotFound = 'نوع وارد نشده است';
-    public const repairShopNotSend = 'نام تعمیرگاه وارد نشده است';
-    public const PostalCodeNotSend = 'کد پستی وارد نشده است';
-    public const AddressNotSend = 'آدرس وارد نشده است';
-
-    //------> [FALSE] NotfoundParameter
-    public const ParameterNotFound = 'پارامتر مربوطه یافت نشد!';
-    public const NotExistHistory = 'سرویسی برای خودرو وجود ندارد';
-    public const NotExistService = 'سرویس مورد نظر یافت نشد';
     public const CarNotFound = 'شناسه ماشین یافت نشد';
     public const RepairNotFound = 'شناسه صنفی مورد نظر پیدا نشد';
-    public const PlateNotFound = 'پلاک وارد شده در سامانه وجود ندارد';
     public const UserNotFound = 'کاربر مورد نظر پیدا نشد';
-    public const ServiceNotFound = 'سرویس مورد نظر پیدا نشد';
-    public const ServiceNotSubmit = 'تغییر سرویس مورد نظر انجام نشد';
-    public const ServicesRequestNotFound = 'کد مرجع کاربر برای عملیات مربوطه وجود ندارد';
-    public const WorkerNotFound = 'سرویس کار پیدا نشد';
-
-    //------> [FALSE] WrongParameter
-    public const WrongKmCurrent = 'کیلومتر خودرو نبایداز کیلومتر فعلی خودرو کمتر باشد';
-    public const WrongSubmitKmReplace = 'کیلومتر تعویض نباید از کیلومتر فعلی کمتر باشد';
-    public const WrongKmReplace = 'کیلومتر تعویض اشتباه وارد شده است';
-    public const WrongCode = 'کد وارد شده اشتباه است';
-    public const WrongIdentifiCode = 'کد دعوت وارد شده اشتباه میباشد';
-    public const WrongUserNameOrPassWord = 'شماره صنفی یا رمز عبور اشتباه میباشد';
-    public const WrongYearForCar = 'سال تولید خودرو اشتباه ثبت شده است';
-    public const WrongDateInsurance = 'تاریخ انقضا بیمه شخص ثالث اشتباه ثبت شده است';
-
-    //------> [FALSE] Duplicate
-    public const DuplicateTradeID = 'شناسه صنفی وارد شده تکراری میباشد!';
     public const DuplicateUser = 'کابر قبلا در سامانه عضو شده است';
-    public const DuplicateUserID = 'شماره موبایل وارد شده تکراری میباشد!';
-    public const DuplicatePlate = 'پلاک وارد شده تکراری میباشد';
-    public const DuplicateParameter = 'پارامتر وارد شده تکراری میباشد!';
-    public const DuplicateIdentifiCode = 'معرف شما قبلا ثبت شده است';
-    public const RepairInfoNotComplete = 'اطلاعات تعمیرگاه کامل نمیباشد';
-    public const recordeISRepeat = 'خودروی پیش فرض وجود دارد';
+    public const Error = 'مشکلی پیش آمده است، لطفا چند دقیقه بعد مجدد اقدام کنید';
 
-    //------> [FALSE] Identifier
-    public const RegisterScore = 'امتیاز با موفقیت ثبت شد';
-
-    //------> [FALSE] endRequest
-    public const ReferenceIDNotFound = 'درخواست شماخاتمه یافته است';
 
     public function getData()
     {

@@ -7,7 +7,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
     $router->post('register', 'RegisterController@register')->name('auth.register.store');
     // Login
 //    $router->get('login', 'LoginController@view')->name('login');
-    $router->get('login', 'LoginController@view')->name('auth.login');
+    $router->get('login', 'LoginController@view')->name('login');
+//    $router->get('login', 'LoginController@view')->name('login');
     $router->post('login', 'LoginController@login')->name('auth.login.store');
     // Email Verify
     $router->get('email/verify', 'RepairsController@view')->name('auth.verify.email')->middleware('auth');
@@ -19,5 +20,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
     $router->get('password/reset', 'ResetController@reset')->name('password.reset')->middleware('guest');
     $router->post('password/reset', 'ResetController@update')->name('password.update')->middleware('guest');
     // Logout
-    $router->get('logout', 'LogoutController')->name('auth.logout')->middleware('auth');
+//    $router->get('logout', 'LogoutController')->name('auth.logout')->middleware('auth');
+    $router->get('logout', 'LogoutController@logout')->name('auth.logout')->middleware('auth');
+
 });

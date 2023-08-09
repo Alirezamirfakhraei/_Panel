@@ -54,7 +54,7 @@
             <div class="row mt-3">
                 <div class="col-12 text-center">
                     <p class="text-muted">حساب کاربری دارید؟
-                        <a href="{{route('auth.login')}}" class="text-dark ml-1"><b>وارد شوید</b></a>
+                        <a href="{{route('login')}}" class="text-dark ml-1"><b>وارد شوید</b></a>
                     </p>
                 </div>
             </div>
