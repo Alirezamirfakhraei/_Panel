@@ -1,5 +1,7 @@
 {
-    "permission super admin": "مدیر کل",
+    "permission repair_shop": "تعمیرگاه",
+    "permission worker": "تعمیرکار سیار",
+    "permission super_admin": "مدیر کل",
     "permission panel": "دسترسی پنل مدیریت",
     "permission users": "دسترسی کاربران",
     "permission categories": "دسترسی دسته بندی ها",

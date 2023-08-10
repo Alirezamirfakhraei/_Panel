@@ -6,7 +6,9 @@ use Spatie\Permission\Models\Permission as PemissionSpatie;
 
 class Permission extends PemissionSpatie
 {
-    PUBLIC CONST PERMISSION_SUPER_ADMIN = 'permission super admin';
+    PUBLIC CONST PERMISSION_REPAIR_SHOP = 'permission repair_shop';
+    PUBLIC CONST PERMISSION_WORKER = 'permission worker';
+    PUBLIC CONST PERMISSION_SUPER_ADMIN = 'permission super_admin';
     PUBLIC CONST PERMISSION_PANEL = 'permission panel';
     PUBLIC CONST PERMISSION_USERS = 'permission users';
     PUBLIC CONST PERMISSION_CATEGORIES = 'permission categories';
@@ -17,6 +19,8 @@ class Permission extends PemissionSpatie
     PUBLIC CONST PERMISSION_ADVERTISINGS = 'permission advertisings';
 
     public static array $permissions = [
+        self::PERMISSION_REPAIR_SHOP,
+        self::PERMISSION_WORKER,
         self::PERMISSION_SUPER_ADMIN,
         self::PERMISSION_PANEL,
         self::PERMISSION_USERS,
