@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
-use Mlk\User\Http\Controllers\Main\UserController;
+use Mlk\User\Http\Controllers\UserController;
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], static function ($router) {
-    Route::controller(UserController::class)->group(function () {
+    Route::controller(UserController::class)->group(function ($router) {
         Route::get('users/add/{userId}/role', 'addRole')->name('users.add.role');
         Route::post('users/add/{userId}/role', 'addRoleStore')->name('users.add.role.store');
         Route::delete('users/remove/{userId}/role/{roleId}', 'removeRole')->name('users.remove.role');

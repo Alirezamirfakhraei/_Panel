@@ -2,13 +2,20 @@
 
 namespace Mlk\Category\Repositories;
 
+use Illuminate\Support\Facades\DB;
 use Mlk\Category\Models\Category;
 
 class CategoryRepo
 {
+
+    private function query()
+    {
+        return DB::connection('mysql_second')->table("categories");
+    }
+
     public function index()
     {
-        return $this->query()->latest();
+        return DB::connection('mysql_second')->table("categories")->latest()->paginate(20);
     }
 
     public function findById($id)
@@ -38,10 +45,5 @@ class CategoryRepo
     public function findBySlug($slug)
     {
         return $this->query()->where('status', Category::STATUS_ACTIVE)->whereSlug($slug)->first();
-    }
-
-    private function query(): \Illuminate\Database\Eloquent\Builder
-    {
-        return Category::query();
     }
 }

@@ -78,7 +78,8 @@ $help = new helper();
                                                class="btn btn-success ml-1">
                                                 <i class="fas fa-plus"></i>
                                             </a>
-                                            <form action="{{ route('users.destroy', $car->id) }}" method="POST">
+                                            <form onsubmit="return confirm('آیا مایل به حذف کاربر میباشید؟');"
+                                                  action="{{ route('users.destroy', $car->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger ml-1">

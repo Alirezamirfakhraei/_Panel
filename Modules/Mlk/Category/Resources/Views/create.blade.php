@@ -51,15 +51,15 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label" for="parent_id">زیر دسته (اجباری نیست)</label>
+                                        <label class="col-sm-2 col-form-label" for="parentID">زیر دسته (اجباری نیست)</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control @error('parent_id') is-invalid @enderror" name="parent_id">
+                                            <select class="form-control @error('parentID') is-invalid @enderror" name="parentID">
                                                 <option value="" selected>زیر دسته دسته بندی را وارد کنید</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('parent_id')
+                                            @error('parentID')
                                                 <br>
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror

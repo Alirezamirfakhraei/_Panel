@@ -1,6 +1,6 @@
-@extends('Panel::layouts.master')
+{{--@extends('Panel::layouts.master')--}}
 
-@section('title', 'لیست دسته بندی')
+{{--@section('title', 'لیست دسته بندی')--}}
 
 @section('content')
     <div class="container-fluid">
@@ -26,7 +26,7 @@
                                     <th>عنوان دسته بندی</th>
                                     <th>وضعیت</th>
                                     <th>زیر دسته</th>
-                                    <th>کاربر</th>
+                                    <th>تاریخ ساخت</th>
                                     <th>تاریخ ساخت</th>
                                     <th>عملیات</th>
                                 </tr>
@@ -41,9 +41,9 @@
                                                 @lang($category->status)
                                             </span>
                                         </td>
-                                        <td>{{ $category->getParent() }}</td>
-                                        <td>{{ $category->user->name }}</td>
-                                        <td>{{ jdate($category->created_at)->format('Y-m-d') }}</td>
+                                        <td>{{ $category->title }}</td>
+                                        <td>{{ $category->title }}</td>
+                                        <td>{{ $category->created_at }}</td>
                                         <td>
                                             <div class="row">
                                                 <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">

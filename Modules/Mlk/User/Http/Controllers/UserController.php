@@ -57,12 +57,6 @@ class UserController extends Controller
         $this->service->update($request, $id);
         return to_route('users.index');
     }
-    public function updateUsers(Request $request, $id)
-    {
-//      $this->authorize('index', User::class);
-        $this->service->updateUsers($request, $id);
-        return to_route('users.index');
-    }
 
     public function destroy($id)
     {
@@ -74,14 +68,14 @@ class UserController extends Controller
     // Role
     public function addRole($user_id, RoleRepo $roleRepo)
     {
-        $this->authorize('index', User::class);
+//        $this->authorize('index', User::class);
         $roles = $roleRepo->index()->get();
         return view('User::add-roles', compact(['user_id', 'roles']));
     }
 
     public function addRoleStore(AddRoleRequest $request, $userId)
     {
-        $this->authorize('index', User::class);
+//        $this->authorize('index', User::class);
         $user = $this->repo->findById($userId);
         $this->service->addRole($request->role, $user);
         alert()->success('اد کردن مقام به کاربر', 'عملیات با موفقیت انجام شد');

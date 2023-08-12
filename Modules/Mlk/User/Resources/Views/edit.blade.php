@@ -59,7 +59,7 @@
                                             <input type="text"
                                                    class="form-control @error('lastname') is-invalid @enderror"
                                                    id="lastname" value="{{$user->lastname}}" name="lastname"
-                                                   placeholder="رمز عبور کاربر را وارد کنید">
+                                                   placeholder="نام خانوداگی کاربر را وارد کنید">
                                             @error('lastname')
                                             <br>
                                             <div class="alert alert-danger">{{ $message }}</div>

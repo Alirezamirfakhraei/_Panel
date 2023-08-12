@@ -18,6 +18,8 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, Liker;
 
+//    protected $connection = 'mysql_second';
+
     protected $fillable = [
         'email', 'password','userID', 'status'
     ];

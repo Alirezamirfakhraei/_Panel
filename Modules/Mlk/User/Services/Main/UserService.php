@@ -4,6 +4,7 @@ namespace Mlk\User\Services\Main;
 
 use Illuminate\Support\Facades\DB;
 use Mlk\Share\Repositories\ShareRepo;
+use Mlk\User\Http\Requests\AddRoleRequest;
 use Mlk\User\Models\User;
 use helper;
 
@@ -74,5 +75,10 @@ class UserService
     {
         toast(helper::SubmitRequest, 'success');
         return $this->query()->where('id', $id)->delete();
+    }
+
+    public function addRole($user , $role)
+    {
+        return $user->assignRole($role);
     }
 }

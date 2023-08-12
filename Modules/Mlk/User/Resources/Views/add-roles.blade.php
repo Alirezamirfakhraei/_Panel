@@ -18,14 +18,14 @@
                                         @endforeach
                                     </ul>
                                 @endif
-                                <form class="form-horizontal" role="form" method="POST" action="{{ route('users.add.role.store', $user_id) }}">
+                                <form class="form-horizontal" role="form" method="POST" action="{{ route('users.add.role.store',$user_id) }}">
                                     @csrf
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="role">مقام</label>
                                         <div class="col-sm-10">
                                             <select class="form-control @error('role') is-invalid @enderror" name="role">
                                                 @foreach ($roles as $role)
-                                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                                        <option value="{{ $role->name }}">{{ $role->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('role')

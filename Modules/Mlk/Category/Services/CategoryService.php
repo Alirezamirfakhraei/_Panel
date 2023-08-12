@@ -2,15 +2,22 @@
 
 namespace Mlk\Category\Services;
 
+use Illuminate\Support\Facades\DB;
 use Mlk\Category\Models\Category;
 
 class CategoryService
 {
+
+    private function query()
+    {
+        return DB::connection('mysql_second')->table("categories");
+    }
+
+
     public function store($request)
     {
-        return Category::query()->create([
-            'user_id' => auth()->id(),
-            'parent_id' => $request->parent_id,
+        return $this->query()->insert([
+            'parentID' => $request->parentID,
             'title' => $request->title,
             'slug' => $this->makeSlug($request->title),
             'keywords' => $request->keywords,
@@ -21,10 +28,8 @@ class CategoryService
 
     public function update($request, $id)
     {
-        return Category::query()->whereId($id)->update([
-            'user_id' => auth()->id(),
-            'user_id' => auth()->id(),
-            'parent_id' => $request->parent_id,
+        return $this->query()->whereId($id)->update([
+            'parentID' => $request->parentID,
             'title' => $request->title,
             'slug' => $this->makeSlug($request->title),
             'keywords' => $request->keywords,

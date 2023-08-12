@@ -14,7 +14,8 @@ class UserRepo
 
     public function findById($id)
     {
-        return User::query()->findOrFail($id);
+//        User::query()->find($id);
+        return DB::connection('mysql_second')->table("users")->find($id);
     }
 
     public function delete($id)
