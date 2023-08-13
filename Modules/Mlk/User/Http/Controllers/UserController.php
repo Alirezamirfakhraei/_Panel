@@ -26,7 +26,6 @@ class UserController extends Controller
 
     public function index()
     {
-//        $this->authorize('index', User::class);
         $users = $this->repo->index();
         return view('User::index', compact('users'));
     }
@@ -39,21 +38,18 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $this->authorize('index', User::class);
         $this->service->store($request);
         return to_route('users.index');
     }
 
     public function edit($id)
     {
-//        $this->authorize('index', User::class);
         $user = $this->repo->findById($id);
         return view('User::edit', compact('user'));
     }
 
     public function update(UserUpdateRequest $request, $id)
     {
-        $this->authorize('index', User::class);
         $this->service->update($request, $id);
         return to_route('users.index');
     }
@@ -68,14 +64,12 @@ class UserController extends Controller
     // Role
     public function addRole($user_id, RoleRepo $roleRepo)
     {
-//        $this->authorize('index', User::class);
         $roles = $roleRepo->index()->get();
         return view('User::add-roles', compact(['user_id', 'roles']));
     }
 
     public function addRoleStore(AddRoleRequest $request, $userId)
     {
-//        $this->authorize('index', User::class);
         $user = $this->repo->findById($userId);
         $this->service->addRole($request->role, $user);
         alert()->success('اد کردن مقام به کاربر', 'عملیات با موفقیت انجام شد');
@@ -84,7 +78,6 @@ class UserController extends Controller
 
     public function removeRole($userId, $roleId, RoleRepo $roleRepo)
     {
-        $this->authorize('index', User::class);
         $user = $this->repo->findById($userId);
         $role = $roleRepo->findById($roleId);
         $this->service->deleteRole($user, $role->name);

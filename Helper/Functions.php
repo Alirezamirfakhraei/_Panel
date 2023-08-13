@@ -1,6 +1,6 @@
 <?php
 
-use Modules\Cars\Models\Cars;
+use Mlk\Cars\Models\Cars;
 use Modules\Repairs\Models\Repair;
 use Modules\Services\Models\Service;
 use Modules\Users\Models\User;

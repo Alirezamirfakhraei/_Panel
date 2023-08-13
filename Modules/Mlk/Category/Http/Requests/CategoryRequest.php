@@ -16,7 +16,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'parentID' => 'nullable|exists:categories,id',
+            'parentID' => 'nullable|exists:mysql_second.categories,id',
             'title' => 'required|string|min:3|max:190|unique:categories,id',
             'keywords' => 'nullable|string|min:3|max:250',
             'description' => 'nullable|string|min:3',

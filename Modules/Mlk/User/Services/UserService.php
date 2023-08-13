@@ -26,8 +26,6 @@ class UserService
         ]);
     }
 
-
-
     public function addRole($role, $user)
     {
         return $user->assignRole($role);

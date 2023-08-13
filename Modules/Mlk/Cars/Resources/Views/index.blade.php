@@ -2,7 +2,7 @@
 <?php
 $help = new helper();
 ?>
-@section('title', 'لیست کاربران')
+@section('title', 'لیست وسایل نقلیه')
 
 @section('content')
     <div class="container-fluid">
@@ -10,7 +10,7 @@ $help = new helper();
             <div class="col-lg-12">
                 <div class="card-box">
                     <div class="float-right">
-                        <a href="" class="arrow-none btn btn-primary text-white" aria-expanded="false">
+                        <a href="{{ route('cars.create') }}" class="arrow-none btn btn-primary text-white" aria-expanded="false">
                             ساخت خودرو جدید
                         </a>
                     </div>
@@ -71,15 +71,15 @@ $help = new helper();
                                     <td>{{ explode(' ' , jdate($car->created_at))[0] }}</td>
                                     <td>
                                         <div class="row">
-                                            <a href="{{ route('users.edit', $car->id) }}" class="btn btn-warning">
+                                            <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-warning">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <a href="{{ route('users.add.role', $car->id) }}"
+                                            <a href="{{ route('cars.create', $car->id) }}"
                                                class="btn btn-success ml-1">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                             <form onsubmit="return confirm('آیا مایل به حذف کاربر میباشید؟');"
-                                                  action="{{ route('users.destroy', $car->id) }}" method="POST">
+                                                  action="{{ route('cars.destroy',$car->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger ml-1">

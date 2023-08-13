@@ -1,6 +1,6 @@
-{{--@extends('Panel::layouts.master')--}}
+@extends('Panel::layouts.master')
 
-{{--@section('title', 'لیست دسته بندی')--}}
+@section('title', 'لیست دسته بندی')
 
 @section('content')
     <div class="container-fluid">
@@ -56,7 +56,7 @@
                                                         <i class="fas fa-spinner"></i>
                                                     </button>
                                                 </form>
-                                                <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                                                <form onsubmit="return confirm('آیا مایل ب حذف دسته بندی میباشید؟')" action="{{ route('categories.destroy', $category->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger ml-1">

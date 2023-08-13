@@ -15,17 +15,27 @@ class CategoryRepo
 
     public function index()
     {
-        return DB::connection('mysql_second')->table("categories")->latest()->paginate(20);
+        return $this->query()->latest()->paginate(20);
+    }
+
+    public function findAll()
+    {
+        return $this->query()->get()->toArray();
     }
 
     public function findById($id)
     {
-        return $this->query()->findOrFail($id);
+        return $this->query()->find($id);
     }
 
     public function delete($id)
     {
         return $this->query()->where('id', $id)->delete();
+    }
+
+    public function findCat($categoryID)
+    {
+      return $this->query()->where('id', '!=', $categoryID->id)->get();
     }
 
     public function changeStatus($category)

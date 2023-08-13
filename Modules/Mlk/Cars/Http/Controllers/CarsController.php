@@ -2,6 +2,7 @@
 
 namespace Mlk\Cars\Http\Controllers;
 
+use Mlk\Cars\Http\Requests\CarRequest;
 use Mlk\Cars\Repositories\CarRepo;
 use Mlk\Cars\Services\CarService;
 use Mlk\Share\Http\Controllers\Controller;
@@ -11,15 +12,27 @@ class CarsController extends Controller
     public CarRepo $repo;
     public CarService $service;
 
-    public function __construct(CarRepo $userRepo, CarService $userService)
+    public function __construct(CarRepo $carRepo, CarService $carService)
     {
-        $this->repo = $userRepo;
-        $this->service = $userService;
+        $this->repo = $carRepo;
+        $this->service = $carService;
     }
     public function index()
     {
-//        $this->authorize('index', User::class);
         $cars = $this->repo->index();
         return view('Cars::index', compact('cars'));
+    }
+
+    public function create()
+    {
+        $categories = $this->repo->findAllCategories();
+        $companies = $this->repo->findAllCompany();
+        return view('Cars::create' , compact(['categories' , 'companies']));
+    }
+
+    public function store(CarRequest $request)
+    {
+        $this->service->store($request);
+        return to_route('cars.index');
     }
 }

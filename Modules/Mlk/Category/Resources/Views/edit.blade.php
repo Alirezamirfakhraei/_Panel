@@ -61,7 +61,7 @@
                                             <select class="form-control @error('parent_id') is-invalid @enderror" name="parent_id">
                                                 <option value="" selected>زیر دسته دسته بندی را وارد کنید</option>
                                                 @foreach ($categories as $cat)
-                                                    <option @if ($category->parent_id === $cat->id) selected @endif
+                                                    <option @if ($category->parentID === $cat->id) selected @endif
                                                         value="{{ $cat->id }}">{{ $cat->title }}
                                                     </option>
                                                 @endforeach

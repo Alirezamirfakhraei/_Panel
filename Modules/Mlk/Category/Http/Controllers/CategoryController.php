@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $categories = $this->repo->index();
+        $categories = $this->repo->findAll();
         return view('Category::create', compact('categories'));
     }
 
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = $this->repo->findById($id);
-        $categories = $this->repo->index()->where('id', '!=', $category->id)->get();
+        $categories = $this->repo->findCat($category);
         return view('Category::edit', compact(['category', 'categories']));
     }
 
