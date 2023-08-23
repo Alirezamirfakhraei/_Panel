@@ -45,14 +45,11 @@ class CarService
     public function store($request)
     {
         $plate = $request->plate[1].$request->plate[2].$request->plate[3].$request->plate[4];
-        dd($plate);
         $help = new helper();
         $findPlate = DB::connection('mysql_second')->table('cars')->where('plate', $plate)->first();
-        dd($plate,$findPlate);
         if ($findPlate) {
             return to_route('cars.create')->with(['danger_message' => helper::DuplicatePlate]);
         }
-        dd($plate , $request->model , $request->company);
         $category = DB::connection('mysql_second')->table('categories')->where('title', $request['company'])->first();
         if (!$category){
             return $help->response('CategoryNotFound', 400, null, helper::CategoryNotFound);

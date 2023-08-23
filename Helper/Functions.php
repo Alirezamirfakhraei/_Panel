@@ -1,7 +1,7 @@
 <?php
 
 use Mlk\Cars\Models\Cars;
-use Modules\Repairs\Models\Repair;
+use Mlk\Repairs\Models\Repair;
 use Modules\Services\Models\Service;
 use Modules\Users\Models\User;
 

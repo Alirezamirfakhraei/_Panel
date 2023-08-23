@@ -14,7 +14,7 @@ class AddUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'userID'      => 'required|string|min:3|max:190|iran_phone',
+            'userID'      => 'required|string|min:3|max:190',
             'email'     => 'required|email|min:3|max:190|unique:users,email',
             'name'     => 'required|string|min:3|max:190',
             'lastname'     => 'required|string|min:3|max:190',

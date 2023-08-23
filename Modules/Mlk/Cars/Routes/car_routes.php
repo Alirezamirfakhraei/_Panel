@@ -6,15 +6,14 @@ use Mlk\Cars\Http\Controllers\CarsController;
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], static function ($router) {
     $router->controller(CarsController::class)->group(function ($router) {
         $router->get('cars', ['uses' => 'CarsController@index', 'as' => 'cars.index']);
-        //create
+//        create
         Route::get('cars/add', 'create')->name('cars.create');
         Route::post('cars/add', 'store')->name('cars.store');
         //edit
-        Route::get('cars/edit/{id}', 'UserController@edit')->name('cars.edit');
-        Route::match(['put', 'patch'], 'users/edit/{id}', 'update')->name('cars.update');
-        //delete
+        Route::get('cars/edit/{id}', 'CarsController@edit')->name('cars.edit');
+//        delete
         Route::delete('cars/remove/{id}', 'removeCar')->name('cars.destroy');
-        //resource
-        Route::resource('users', 'CarsController', ['except' => 'show']);
+//    resource
+        Route::resource('cars', 'CarsController', ['except' => 'show']);
     });
 });

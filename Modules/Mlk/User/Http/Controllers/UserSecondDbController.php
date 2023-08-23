@@ -1,19 +1,14 @@
 <?php
 
-namespace Mlk\User\Http\Controllers\Main;
+namespace Mlk\User\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mlk\Role\Repositories\RoleRepo;
 use Mlk\Share\Http\Controllers\Controller;
-use Mlk\User\Http\Requests\AddRoleRequest;
 use Mlk\User\Http\Requests\AddUserRequest;
-use Mlk\User\Http\Requests\UserRequest;
-use Mlk\User\Http\Requests\UserUpdateRequest;
-use Mlk\User\Models\User;
 use Mlk\User\Repositories\Main\UsersRepository;
 use Mlk\User\Services\Main\UserService;
 
-class UserController extends Controller
+class UserSecondDbController extends Controller
 {
     // SOLID
     // S => Single Responsibility Principle
@@ -67,6 +62,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
 //        $this->authorize('index', User::class);
+        dd($request , $id);
         $this->service->update($request, $id);
         return to_route('users.index');
     }

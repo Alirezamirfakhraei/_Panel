@@ -3,9 +3,6 @@
 namespace Mlk\User\Services\Main;
 
 use Illuminate\Support\Facades\DB;
-use Mlk\Share\Repositories\ShareRepo;
-use Mlk\User\Http\Requests\AddRoleRequest;
-use Mlk\User\Models\User;
 use helper;
 
 class UserService
@@ -45,7 +42,6 @@ class UserService
     public function update($request, $id)
     {
         $attr = $request->validate([
-//            'name' => preg_match('/[آ-ی]/', $request->name),
             'name' => 'required|string|max:255|persian_alpha',
             'lastname' => 'required|string|max:255|persian_alpha',
             'address' => 'required|string|max:255',
