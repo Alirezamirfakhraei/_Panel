@@ -13,6 +13,12 @@ class CarRepo
         return DB::connection('mysql_second')->table("cars");
     }
 
+
+    public function findByID($id)
+    {
+        return DB::connection('mysql_second')->table("cars")->where('id' , $id)->first();
+    }
+
     public function index()
     {
        return DB::connection('mysql_second')->table("cars")->latest()->paginate(20);
@@ -27,7 +33,4 @@ class CarRepo
     {
         return DB::connection('mysql_second')->table("categories")->where('parentID' , '!=',0)->get()->toArray();
     }
-
-
-
 }

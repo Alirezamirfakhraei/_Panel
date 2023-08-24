@@ -43,7 +43,7 @@ class Functions
                     $mode = "CarNotFound";
                     $error = true;
                     $message = helper::CarNotFound;
-                }else{
+                } else {
                     $data = $car;
                 }
             } elseif (isset($input['carID'])) {
@@ -52,10 +52,10 @@ class Functions
                     $mode = "CarNotFound";
                     $error = true;
                     $message = helper::CarNotFound;
-                }else{
+                } else {
                     $data = $car;
                 }
-            }elseif(isset($input['accessToken'])){
+            } elseif (isset($input['accessToken'])) {
                 $defaultRequest = true;
                 $splitToken = explode(Cars::QR, $input['accessToken']);
                 if (count($splitToken) > 0) {
@@ -73,7 +73,7 @@ class Functions
                     $message = helper::Wrong;
                 }
                 $data = $defaultRequest;
-            }else{
+            } else {
                 $error = true;
             }
         }
@@ -130,7 +130,7 @@ class Functions
         }
     }
 
-    public function setPiece($carID , $input)
+    public function setPiece($carID, $input)
     {
         for ($j = 0; $j < 8; $j++) {
 //          $ShortNum = ($request['km_current'] - $request['km_lastReplace']) / Service::STANDARD_USER_SHORT_LOWER[Service::PIECENAME_SHORT[$j]];
@@ -179,24 +179,136 @@ class Functions
         }
         return false;
     }
-    public function checkIsset($request , $issetKeys)
+
+    public function checkIsset($request, $issetKeys)
     {
         $mode = null;
         $error = false;
-        for ($i = 0; $i < count($issetKeys); $i++)
-        {
+        for ($i = 0; $i < count($issetKeys); $i++) {
             if (!isset($request[$issetKeys[$i]]) || isset($request[$issetKeys[$i]]) == null) {
                 $error = true;
                 $mode = $issetKeys[$i];
                 break;
             }
         }
-        if ($error)
-        {
-            return ['mode' => $mode , 'error' => true];
-        }else{
+        if ($error) {
+            return ['mode' => $mode, 'error' => true];
+        } else {
             return ['error' => false];
         }
     }
 
+    public function truePlateView($value)
+    {
+        $partCharacterUniCode = null;
+        $plate = str_split($value, 2);
+        switch ($plate[1]) {
+            case "01":
+                $partCharacterUniCode = "الف";
+                break;
+            case "02":
+                $partCharacterUniCode = "ب";
+                break;
+            case "03":
+                $partCharacterUniCode = "پ";
+                break;
+            case "04":
+                $partCharacterUniCode = "ت";
+                break;
+            case "05":
+                $partCharacterUniCode = "ث";
+                break;
+            case "06":
+                $partCharacterUniCode = "ج";
+                break;
+            case "07":
+                $partCharacterUniCode = "چ";
+                break;
+            case "08":
+                $partCharacterUniCode = "ح";
+                break;
+            case "09":
+                $partCharacterUniCode = "خ";
+                break;
+            case "10":
+                $partCharacterUniCode = "د";
+                break;
+            case "11":
+                $partCharacterUniCode = "ذ";
+                break;
+            case "12":
+                $partCharacterUniCode = "ر";
+                break;
+            case "13":
+                $partCharacterUniCode = "ز";
+                break;
+            case "14":
+                $partCharacterUniCode = "ژ";
+                break;
+            case "15":
+                $partCharacterUniCode = "س";
+                break;
+            case "16":
+                $partCharacterUniCode = "ش";
+                break;
+            case "17":
+                $partCharacterUniCode = "ص";
+                break;
+            case "18":
+                $partCharacterUniCode = "ض";
+                break;
+            case "19":
+                $partCharacterUniCode = "ط";
+                break;
+            case "20":
+                $partCharacterUniCode = "ظ";
+                break;
+            case "21":
+                $partCharacterUniCode = "ع";
+                break;
+            case "22":
+                $partCharacterUniCode = "غ";
+                break;
+            case "23":
+                $partCharacterUniCode = "ف";
+                break;
+            case "24":
+                $partCharacterUniCode = "ق";
+                break;
+            case "25":
+                $partCharacterUniCode = "ک";
+                break;
+            case "26":
+                $partCharacterUniCode = "گ";
+                break;
+            case  "27":
+                $partCharacterUniCode = "ل";
+                break;
+            case "28":
+                $partCharacterUniCode = "م";
+                break;
+            case "29":
+                $partCharacterUniCode = "ن";
+                break;
+            case "30":
+                $partCharacterUniCode = "و";
+                break;
+            case "31":
+                $partCharacterUniCode = "ه";
+                break;
+            case "32":
+                $partCharacterUniCode = "ی";
+                break;
+            case "33":
+                $partCharacterUniCode = "D";
+                break;
+            case "34":
+                $partCharacterUniCode = "S";
+                break;
+            case "35":
+                $partCharacterUniCode = "&";
+                break;
+        }
+        return $partCharacterUniCode;
+    }
 }

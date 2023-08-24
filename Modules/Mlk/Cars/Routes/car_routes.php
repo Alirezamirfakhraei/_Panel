@@ -11,6 +11,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], static function ($ro
         Route::post('cars/add', 'store')->name('cars.store');
         //edit
         Route::get('cars/edit/{id}', 'CarsController@edit')->name('cars.edit');
+        Route::match(['put' , 'patch'],'cars/edit/{id}', 'update')->name('cars.update');
 //        delete
         Route::delete('cars/remove/{id}', 'removeCar')->name('cars.destroy');
 //    resource

@@ -82,4 +82,9 @@ class CarService
         return to_route('cars.index');
     }
 
+    public function update($request , $id)
+    {
+
+    }
+
 }

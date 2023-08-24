@@ -24,7 +24,7 @@ Route::group(['prefix' => 'admin'], static function ($router) {
         //edit user
         Route::get('users/edit/{id}', 'edit')->name('users.edit');
 //        Route::post('users/edit/{id}', 'edit')->name('users.update');
-//        Route::match(['put', 'patch'], 'users/edit/{id}', 'update')->name('users.update');
+        Route::match(['put', 'patch'], 'users/edit/{id}', 'update')->name('users.update');
         //delete user
         Route::delete('users/remove/{id}', 'destroy')->name('users.destroy');
         $router->get('send/email', static function () {

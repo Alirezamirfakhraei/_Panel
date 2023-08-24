@@ -62,7 +62,6 @@ class UserSecondDbController extends Controller
     public function update(Request $request, $id)
     {
 //        $this->authorize('index', User::class);
-        dd($request , $id);
         $this->service->update($request, $id);
         return to_route('users.index');
     }

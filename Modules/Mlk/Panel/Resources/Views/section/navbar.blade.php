@@ -24,7 +24,7 @@
 {{--                            {{ $notification->markAsRead() }}--}}
                             <a href="" target="_blank" class="dropdown-item notify-item active">
                                 <div class="notify-icon">
-                                    <img src="/admin/images/users/user-1.jpg" class="img-fluid rounded-circle" alt="تصویر" />
+                                    <img src="{{ asset('admin/images/scarpinSupp.png') }}" class="img-fluid rounded-circle" alt="تصویر" />
                                 </div>
                                 <p class="notify-details"></p>
                                 <p class="text-muted mb-0 user-msg">
@@ -41,7 +41,7 @@
         <li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button"
                 aria-haspopup="false" aria-expanded="false">
-                <img src="{{ asset('admin/images/users/user-1.jpg') }}" alt="تصویر کاربر" class="rounded-circle">
+                <img src="{{ asset('admin/images/scarpinSupp.png') }}" alt="تصویر کاربر" class="rounded-circle">
                 <span class="pro-user-name ml-1">
                      <i class="mdi mdi-chevron-down"></i>
                 </span>
@@ -68,9 +68,6 @@
     </ul>
     <div class="logo-box">
         <a href="{{ route('panel.index') }}" class="logo text-center">
-            <span class="logo-lg">
-                <img src="{{ asset('admin/images/logo-scarpin.png') }}" alt="تصویر" height="16">
-            </span>
             <span class="logo-sm">
                 <img src="{{ asset('admin/images/logo-sm.png') }}" alt="تصویر" height="24">
             </span>
@@ -81,9 +78,6 @@
             <button class="button-menu-mobile disable-btn waves-effect">
                 <i class="fe-menu"></i>
             </button>
-        </li>
-        <li>
-            <h4 class="page-title-main">پنل مدیریت {{ config('app.name') }}</h4>
         </li>
     </ul>
 </div>

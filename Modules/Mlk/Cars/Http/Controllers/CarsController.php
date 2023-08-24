@@ -2,6 +2,7 @@
 
 namespace Mlk\Cars\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Mlk\Cars\Http\Requests\CarRequest;
 use Mlk\Cars\Repositories\CarRepo;
 use Mlk\Cars\Services\CarService;
@@ -31,6 +32,21 @@ class CarsController extends Controller
     }
 
     public function store(CarRequest $request)
+    {
+        $this->service->store($request);
+        return to_route('cars.index');
+    }
+
+
+    public function edit($id)
+    {
+        $categories = $this->repo->findAllCategories();
+        $companies = $this->repo->findAllCompany();
+        $car = $this->repo->findByID($id);
+        return view('Cars::edit' , compact(['car' , 'categories' , 'companies']));
+    }
+
+    public function update(Request $request , $id)
     {
         $this->service->store($request);
         return to_route('cars.index');
