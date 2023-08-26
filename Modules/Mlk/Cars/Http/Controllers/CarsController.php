@@ -37,7 +37,6 @@ class CarsController extends Controller
         return to_route('cars.index');
     }
 
-
     public function edit($id)
     {
         $categories = $this->repo->findAllCategories();
@@ -46,9 +45,18 @@ class CarsController extends Controller
         return view('Cars::edit' , compact(['car' , 'categories' , 'companies']));
     }
 
-    public function update(Request $request , $id)
+    public function update(CarRequest $request , $id)
     {
-        $this->service->store($request);
+        $this->service->update($request , $id);
         return to_route('cars.index');
     }
+
+    public function destroy($id)
+    {
+//        $this->authorize('index', User::class);
+        $this->service->delete($id);
+        return to_route('users.index');
+    }
+
+
 }

@@ -198,6 +198,120 @@ class Functions
         }
     }
 
+    public function validatePlate($character)
+    {
+        $partCharacterUniCode = null;
+        switch ($character) {
+            case "الف":
+                $partCharacterUniCode = "01";
+                break;
+            case "ب":
+                $partCharacterUniCode = "02";
+                break;
+            case "پ":
+                $partCharacterUniCode = "03";
+                break;
+            case "ت":
+                $partCharacterUniCode = "04";
+                break;
+            case "ث":
+                $partCharacterUniCode = "05";
+                break;
+            case "ج":
+                $partCharacterUniCode = "06";
+                break;
+            case "چ":
+                $partCharacterUniCode = "07";
+                break;
+            case "ح":
+                $partCharacterUniCode = "08";
+                break;
+            case "خ":
+                $partCharacterUniCode = "09";
+                break;
+            case "د":
+                $partCharacterUniCode = "10";
+                break;
+            case "ذ":
+                $partCharacterUniCode = "11";
+                break;
+            case "ر":
+                $partCharacterUniCode = "12";
+                break;
+            case "ز":
+                $partCharacterUniCode = "13";
+                break;
+            case "ژ":
+                $partCharacterUniCode = "14";
+                break;
+            case "س":
+                $partCharacterUniCode = "15";
+                break;
+            case "ش":
+                $partCharacterUniCode = "16";
+                break;
+            case "ص":
+                $partCharacterUniCode = "17";
+                break;
+            case "ض":
+                $partCharacterUniCode = "18";
+                break;
+            case "ط":
+                $partCharacterUniCode = "19";
+                break;
+            case "ظ":
+                $partCharacterUniCode = "20";
+                break;
+            case "ع":
+                $partCharacterUniCode = "21";
+                break;
+            case "غ":
+                $partCharacterUniCode = "22";
+                break;
+            case "ف":
+                $partCharacterUniCode = "23";
+                break;
+            case "ق":
+                $partCharacterUniCode = "24";
+                break;
+            case "ک":
+                $partCharacterUniCode = "25";
+                break;
+            case "گ":
+                $partCharacterUniCode = "26";
+                break;
+            case "ل":
+                $partCharacterUniCode = "27";
+                break;
+            case "م":
+                $partCharacterUniCode = "28";
+                break;
+            case "ن":
+                $partCharacterUniCode = "29";
+                break;
+            case "و":
+                $partCharacterUniCode = "30";
+                break;
+            case "ه":
+                $partCharacterUniCode = "31";
+                break;
+            case "ی":
+                $partCharacterUniCode = "32";
+                break;
+            case "D":
+                $partCharacterUniCode = "33";
+                break;
+            case "S":
+                $partCharacterUniCode = "34";
+                break;
+            case "&":
+                $partCharacterUniCode = "35";
+                break;
+        }
+        return $partCharacterUniCode;
+    }
+
+
     public function truePlateView($value)
     {
         $partCharacterUniCode = null;

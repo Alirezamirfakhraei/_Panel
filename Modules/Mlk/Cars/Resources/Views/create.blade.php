@@ -20,7 +20,6 @@
                                 @endif
                                 <form class="form-horizontal" role="form" method="POST" action="{{ route('cars.store') }}">
                                     @csrf
-
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="name">نام</label>
                                         <div class="col-sm-10">
@@ -32,7 +31,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="lastname">نام خانوادگی</label>
                                         <div class="col-sm-10">
@@ -44,7 +42,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="lastname">شماره همراه </label>
                                         <div class="col-sm-10">
@@ -56,12 +53,11 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="company">کمپانی خودرو</label>
                                         <div class="col-sm-10">
                                             <select class="form-control @error('company') is-invalid @enderror" name="company">
-                                                <option value="" selected>زیردسته بندی را وارد کنید</option>
+                                                <option value="company" selected>زیردسته بندی را وارد کنید</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                                 @endforeach
@@ -72,14 +68,13 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="model">مدل خودرو</label>
                                         <div class="col-sm-10">
                                             <select class="form-control @error('model') is-invalid @enderror" name="model">
                                                 <option value="model" selected>مدل را وارد کنید</option>
                                                 @foreach ($companies as $company)
-                                                    <option value="{{ $company->id }}">{{ $company->title }}</option>
+                                                    <option value="{{ $company->title }}">{{ $company->title }}</option>
                                                 @endforeach
                                             </select>
                                             @error('model')
@@ -129,7 +124,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="chassis_number">شماره شاسی خودرو</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control @error('chassis_number') is-invalid @enderror"
+                                            <input type="text" maxlength="17" class="form-control @error('chassis_number') is-invalid @enderror"
                                                    value="{{ old('chassis_number') }}" id="chassis_number" name="chassis_number" placeholder="شماره شاسی خودرو را وارد کنید">
                                             @error('chassis_number')
                                             <br>
@@ -140,7 +135,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="chassis_number">شماره موتور خودرو</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control @error('engine_number') is-invalid @enderror"
+                                            <input type="text" maxlength="17" class="form-control  @error('engine_number') is-invalid @enderror"
                                                    value="{{ old('engine_number') }}" id="chassis_number" name="engine_number" placeholder="شماره موتور خودرو را وارد کنید">
                                             @error('engine_number')
                                             <br>

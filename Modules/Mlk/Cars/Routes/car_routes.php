@@ -10,10 +10,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], static function ($ro
         Route::get('cars/add', 'create')->name('cars.create');
         Route::post('cars/add', 'store')->name('cars.store');
         //edit
-        Route::get('cars/edit/{id}', 'CarsController@edit')->name('cars.edit');
-        Route::match(['put' , 'patch'],'cars/edit/{id}', 'update')->name('cars.update');
+        Route::get('cars/edit/{id}', 'edit')->name('cars.edit');
+        Route::match(['put', 'patch'], 'car/edit/{id}', 'update')->name('cars.update');
 //        delete
-        Route::delete('cars/remove/{id}', 'removeCar')->name('cars.destroy');
+        Route::delete('cars/remove/{id}', 'destroy')->name('cars.destroy');
 //    resource
         Route::resource('cars', 'CarsController', ['except' => 'show']);
     });

@@ -22,7 +22,7 @@ $function = new Functions();
                                 @endif
                                 <form class="form-horizontal" role="form" method="POST" action="{{ route('cars.update' , $car->id)}}">
                                     @csrf
-
+                                    @method('PATCH')
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="lastname">شماره همراه </label>
                                         <div class="col-sm-10">
@@ -34,12 +34,11 @@ $function = new Functions();
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="company">کمپانی خودرو</label>
                                         <div class="col-sm-10">
                                             <select class="form-control @error('company') is-invalid @enderror" name="company">
-                                                <option value="" selected>زیردسته بندی را وارد کنید</option>
+                                                <option value="company" selected>زیردسته بندی را وارد کنید</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->title }}</option>
                                                 @endforeach
@@ -50,7 +49,6 @@ $function = new Functions();
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="model">مدل خودرو</label>
                                         <div class="col-sm-10">
@@ -79,21 +77,24 @@ $function = new Functions();
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 datepicker col-form-label" for="plate">پلاک خودرو</label>
-                                        <div class="col-sm-10">
-                                            <label>
-                                                <?php $oldPlate = str_split($car->plate) ?>
-                                                <input type="text" value="{{$oldPlate[7].$oldPlate[8]}}" name="plate[4]" class="licenseplate" maxlength="2" placeholder="22"/>
-                                                <input type="text" value="{{$oldPlate[4].$oldPlate[5].$oldPlate[6]}}" name="" class="licenseplate" maxlength="3" placeholder="222"/>
-                                                <input type="text" value="{{$function->truePlateView($car->plate)}}" name="" class="licenseplate" maxlength="1" placeholder="ی"/>
-                                                <input type="text" value="{{$oldPlate[0].$oldPlate[1]}}" name="" class="licenseplate" maxlength="2" placeholder="22"/>
-                                            </label>
-                                            @error('plate')
-                                            <br>
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
+                                            <label class="col-sm-2 datepicker col-form-label" for="plate">پلاک خودرو</label>
+                                            <div class="col-sm-10">
+                                                <?php
+                                                    $split = str_split($car->plate);
+                                                    $character = $function->truePlateView($car->plate);
+                                                    ?>
+                                                <label>
+                                                    <input type="text" value="{{$car->plate[6].$car->plate[7]}}" name="plate[4]" class="licenseplate" maxlength="2" placeholder="22"/>
+                                                    <input type="text" value="{{$car->plate[4].$car->plate[5].$car->plate[6]}}" name="plate[3]" class="licenseplate" maxlength="3" placeholder="222"/>
+                                                    <input type="text" value="{{$character}}"                    name="plate[2]" class="licenseplate" maxlength="1" placeholder="ی"/>
+                                                    <input type="text" value="{{$car->plate[0].$car->plate[1]}}" name="plate[1]" class="licenseplate" maxlength="2" placeholder="22"/>
+                                                </label>
+                                                @error('plate')
+                                                <br>
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
                                         </div>
-                                    </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="third_insurance">بیمه شخص ثالث خودرو</label>
                                         <div class="col-sm-10">
@@ -108,7 +109,7 @@ $function = new Functions();
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="chassis_number">شماره شاسی خودرو</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control @error('chassis_number') is-invalid @enderror"
+                                            <input type="text" maxlength="17" class="form-control @error('chassis_number') is-invalid @enderror"
                                                    value="{{ $car->chassis_number }}" id="chassis_number" name="chassis_number" placeholder="شماره شاسی خودرو را وارد کنید">
                                             @error('chassis_number')
                                             <br>
@@ -119,7 +120,7 @@ $function = new Functions();
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="chassis_number">شماره موتور خودرو</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control @error('engine_number') is-invalid @enderror"
+                                            <input type="text" maxlength="17" class="form-control @error('engine_number') is-invalid @enderror"
                                                    value="{{ $car->engine_number }}" id="chassis_number" name="engine_number" placeholder="شماره موتور خودرو را وارد کنید">
                                             @error('engine_number')
                                             <br>

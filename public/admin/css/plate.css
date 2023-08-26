@@ -4,11 +4,15 @@
 /*}*/
 .license-plate {
     margin: 0 auto;
-    min-width: 6.8em;
-    display: inline-block;
+    min-width: 10em;
+    /*display: inline-block;*/
     border-radius: 0.2em;
     border: 0.08em solid #333;
     height: 1.9em;
+    width: 6vw;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
     background-color: #ddd;
     text-align: center;
     color: rgb(40, 47, 37);

@@ -51,9 +51,6 @@
                                                 <a href="{{ route('users.edit', $repair->id) }}" class="btn btn-warning">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                                <a href="{{ route('users.add.role', $repair->id) }}" class="btn btn-success ml-1">
-                                                    <i class="fas fa-plus"></i>
-                                                </a>
                                                 <form action="{{ route('users.destroy', $repair->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')

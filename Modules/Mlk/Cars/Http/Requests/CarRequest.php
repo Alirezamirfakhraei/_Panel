@@ -16,11 +16,13 @@ class CarRequest extends FormRequest
         return [
             'userID' => 'required|string',
             'company' => 'required|string',
-            'model' => 'required|string|exists:mysql_second.cars,id',
+            'model' => 'required|string',
             'plate' => 'required',
             'year' => 'required|string',
             'km_current' => 'required',
             'third_insurance' => 'required|string',
+            'chassis_number' => 'required|string|digits:17',
+            'engine_number' => 'required|string|digits:17',
         ];
     }
 }

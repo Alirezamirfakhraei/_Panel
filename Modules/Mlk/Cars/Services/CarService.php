@@ -2,6 +2,7 @@
 
 namespace Mlk\Cars\Services;
 
+use Functions;
 use helper;
 use Illuminate\Support\Facades\DB;
 use Mlk\Cars\Models\Cars;
@@ -11,6 +12,27 @@ class CarService
     private function query()
     {
         return DB::connection('mysql_second')->table('cars');
+    }
+
+    private function generateCarId($codeLength, $mode = null)
+    {
+        $characters = '0123456789';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        if ($mode == 'customer') {
+            $randomString .= "IRI";
+            for ($i = 3; $i < $codeLength; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+        } else {
+            for ($i = 0; $i < $codeLength; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+        }
+        if ($this->query()->where('carID', $randomString)->exists()) {
+            return $randomString . '1';
+        }
+        return $randomString;
     }
 
     private function calculateKmAverage($km, $item)
@@ -41,32 +63,28 @@ class CarService
         return [];
     }
 
-
     public function store($request)
     {
-        $plate = $request->plate[1].$request->plate[2].$request->plate[3].$request->plate[4];
-        $help = new helper();
-        $findPlate = DB::connection('mysql_second')->table('cars')->where('plate', $plate)->first();
+        $function = new Functions();
+        $characterPlate = $function->validatePlate($request->plate[2]);
+        $newPlate = $request->plate[1].$characterPlate.$request->plate[3].$request->plate[4];
+        $findPlate = DB::connection('mysql_second')->table('cars')->where('plate', $newPlate)->first();
         if ($findPlate) {
             return to_route('cars.create')->with(['danger_message' => helper::DuplicatePlate]);
         }
-        $category = DB::connection('mysql_second')->table('categories')->where('title', $request['company'])->first();
+        $category = DB::connection('mysql_second')->table('categories')->where('id', $request['company'])->first();
         if (!$category){
-            return $help->response('CategoryNotFound', 400, null, helper::CategoryNotFound);
-        }
-        $check_1 = $help->CheckDate(null, $request['year'], "year", '');
-        if ($check_1['error']) {
-            return $help->response('Wrong', 400, null, helper::WrongYearForCar);
+            return to_route('cars.create')->with(['danger_message' => helper::CarNotFound]);
         }
         $insert = $this->query()->insert([
             'userCreated' => $request['userID'],
             'userID' => $request['userID'],
-            'categoryID' => $category['id'],
-            'carID' => Cars::generateCarId(16),
+            'categoryID' => $category->id,
+            'carID' => $this->generateCarId(9 , ''),
             'company' => $request['company'],
             'model' => $request['model'],
             'year' => $request['year'],
-            'plate' => $request['plate'],
+            'plate' => $newPlate,
             'third_insurance' => $request['third_insurance'],
             'km_lastReplace' => $request['km_lastReplace'],
             'km_average' => self::calculateKmAverage($request['km_current'], ["year" => $request['year'], "third_insurance" => $request['third_insurance']]),
@@ -84,7 +102,46 @@ class CarService
 
     public function update($request , $id)
     {
+        $function = new Functions();
+        $characterPlate = $function->validatePlate($request->plate[2]);
+        $newPlate = $request->plate[1].$characterPlate.$request->plate[3].$request->plate[4];
+        $findPlate = DB::connection('mysql_second')->table('cars')->where('plate', $newPlate)->first();
+        if ($findPlate) {
+            return to_route('cars.create')->with(['danger_message' => helper::DuplicatePlate]);
+        }
+        $category = DB::connection('mysql_second')->table('categories')->where('id', $request['company'])->first();
+        if (!$category){
+            return to_route('cars.create')->with(['danger_message' => helper::CarNotFound]);
+        }
+        $update = $this->query()->where('id' , $id)->update([
+            'userCreated' => auth()->id(),
+            'userID' => $request['userID'],
+            'categoryID' => $category->id,
+            'carID' => $this->generateCarId(9 , ''),
+            'company' => $request['company'],
+            'model' => $request['model'],
+            'year' => $request['year'],
+            'plate' => $newPlate,
+            'third_insurance' => $request['third_insurance'],
+            'km_average' => self::calculateKmAverage($request['km_current'], ["year" => $request['year'], "third_insurance" => $request['third_insurance']]),
+            'km_at' => $request['km_current'],
+            'km_current' => $request['km_current'],
+            'chassis_number' => $request['chassis_number'],
+            'engine_number' => $request['engine_number'],
+            'pin' => 0,
+        ]);
+        if ($update){
+            toast(helper::SubmitRequest, 'success');
+        }else{
+            toast(helper::NotInsertNewRecorde, 'danger');
+        }
+        return to_route('cars.index');
+    }
 
+    public function delete($id)
+    {
+        toast(helper::SubmitRequest, 'success');
+        return $this->query()->where('id', $id)->delete();
     }
 
 }
