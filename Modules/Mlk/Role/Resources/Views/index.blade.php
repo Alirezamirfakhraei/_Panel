@@ -30,13 +30,13 @@
                                     <tr class="text-center">
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $role->name }}</td>
-                                        <td>
-                                            @foreach ($role->permissions as $permission)
-                                                <span class="badge badge-primary">
+                                        @foreach ($role->permissions as $permission)
+                                        <td class="badge badge-primary mt-2 ">
+                                                <span>
                                                     @lang($permission->name)
                                                 </span>
-                                            @endforeach
                                         </td>
+                                        @endforeach
                                         <td>{{ jdate($role->created_at)->format('Y-m-d') }}</td>
                                         <td>
                                             <div class="row">

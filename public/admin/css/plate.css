@@ -1,11 +1,6 @@
-
-/*html {*/
-/*    font-size: 40px;*/
-/*}*/
 .license-plate {
     margin: 0 auto;
     min-width: 10em;
-    /*display: inline-block;*/
     border-radius: 0.2em;
     border: 0.08em solid #333;
     height: 1.9em;

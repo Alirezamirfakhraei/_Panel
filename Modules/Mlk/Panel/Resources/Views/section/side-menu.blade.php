@@ -1,6 +1,6 @@
 <div id="sidebar-menu">
     <ul class="metismenu" id="side-menu">
-        <li class="menu-title">منو</li>
+        <li class="menu-title"></li>
         @if(auth()->check())
             @foreach (config('panelConfig.menus') as $menu)
                 <li>

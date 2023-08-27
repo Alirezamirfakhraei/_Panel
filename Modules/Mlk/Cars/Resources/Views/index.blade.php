@@ -26,7 +26,7 @@ $function = new Functions();
                         <table class="table table-striped mb-0">
                             <thead>
                             <tr class="text-center">
-                                <th>#</th>
+                                <th>ردیف</th>
                                 <th>شماره همراه</th>
                                 <th>مدل خودرو</th>
                                 <th>شناسه خودرو</th>
@@ -74,7 +74,7 @@ $function = new Functions();
                                     <td>{{ $car->third_insurance}}</td>
                                     <td>{{ explode(' ' , jdate($car->created_at))[0] }}</td>
                                     <td>
-                                        <div class="row ">
+                                        <div class="row">
                                             <!-- Button trigger modal -->
                                             <div class="d-flex align-items-center justify-content-center">
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
@@ -87,9 +87,9 @@ $function = new Functions();
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <a href="{{route('cars.detail', $car->id)}}" type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
-                                                            </button>
+                                                            </a>
                                                         </div>
                                                         <div class="modal-body">
                                                             <ul class="list-group text-left mb-2">

@@ -12,6 +12,8 @@ class RepairServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views/', 'Repairs');
         Route::middleware('web')->namespace('Mlk\Repairs\Http\Controllers')->group(__DIR__ . '/../Routes/repair_routes.php');
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/Lang');
+
     }
 
 

@@ -7,9 +7,28 @@ use Illuminate\Support\Facades\DB;
 class RepairRepo
 {
 
+    private function query()
+    {
+        return DB::connection('mysql_second')->table("repairs");
+    }
+
     public function index()
     {
-       return DB::connection('mysql_second')->table("repairs")->latest()->paginate(20);
+       return $this->query()->latest()->paginate(20);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

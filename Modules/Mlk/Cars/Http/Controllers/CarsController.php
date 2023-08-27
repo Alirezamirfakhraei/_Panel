@@ -21,7 +21,7 @@ class CarsController extends Controller
     public function index()
     {
         $cars = $this->repo->index();
-        return view('Cars::index', compact('cars'));
+        return view('Cars::index', compact(['cars']));
     }
 
     public function create()
@@ -51,11 +51,17 @@ class CarsController extends Controller
         return to_route('cars.index');
     }
 
+    public function detail($id)
+    {
+        $details = $this->repo->findByID($id);
+        return view('Cars::index', compact('details'));
+    }
+
     public function destroy($id)
     {
 //        $this->authorize('index', User::class);
         $this->service->delete($id);
-        return to_route('users.index');
+        return to_route('cars.index');
     }
 
 

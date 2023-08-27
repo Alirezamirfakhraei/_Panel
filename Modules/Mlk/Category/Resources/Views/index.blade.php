@@ -36,8 +36,8 @@
                                     <tr class="text-center">
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $category->title }}</td>
-                                        <td>
-                                            <span class="badge badge-primary">
+                                        <td class="badge badge-primary mt-2">
+                                            <span>
                                                 @lang($category->status)
                                             </span>
                                         </td>
