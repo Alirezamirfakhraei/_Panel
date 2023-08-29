@@ -425,4 +425,5 @@ class Functions
         }
         return $partCharacterUniCode;
     }
+
 }

@@ -45,7 +45,9 @@
             "Mlk\\Share\\": "Modules/Mlk/Share/",
             "Mlk\\Advertising\\": "Modules/Mlk/Advertising/",
             "Mlk\\Cars\\": "Modules/Mlk/Cars/",
-            "Mlk\\Repairs\\": "Modules/Mlk/Repairs/"
+            "Mlk\\Repairs\\": "Modules/Mlk/Repairs/",
+            "Mlk\\ContactUs\\": "Modules/Mlk/ContactUs/",
+            "Mlk\\Tickets\\": "Modules/Mlk/Tickets/"
         },
         "files": [
             "Modules/Mlk/Share/helpers.php",

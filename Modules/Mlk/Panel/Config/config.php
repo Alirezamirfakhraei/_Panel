@@ -8,5 +8,7 @@ return [
         'repairs' => [],
         'categories' => [],
         'roles' => [],
+        'contactUs' => [],
+        'tickets' => [],
     ],
 ];

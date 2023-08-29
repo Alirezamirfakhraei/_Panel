@@ -2,6 +2,7 @@
 
 namespace Mlk\Repairs\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Mlk\Repairs\Http\Requests\AddRepairRequest;
 use Mlk\Repairs\Repositories\RepairRepo;
 use Mlk\Repairs\Services\RepairService;
@@ -32,6 +33,18 @@ class RepairsController extends Controller
     public function store(AddRepairRequest $request)
     {
         return $this->service->store($request);
+    }
+
+    public function edit($id)
+    {
+        $repair = $this->repo->findById($id);
+        return view('Repairs::edit' , compact('repair'));
+    }
+
+    public function update(AddRepairRequest $request , $id)
+    {
+        $this->service->update($request , $id);
+        return to_route('repairs.index');
     }
 
     public function destroy($id)

@@ -186,6 +186,8 @@ return [
          */
         Mlk\Cars\Providers\CarServiceProvider::class,
         Mlk\Repairs\Providers\RepairServiceProvider::class,
+        Mlk\ContactUs\Providers\ContactUsServiceProvider::class,
+        Mlk\Tickets\Providers\TicketsServiceProvider::class,
         Mlk\User\Providers\UserServiceProvider::class,
         Mlk\Auth\Providers\AuthServiceProvider::class,
         Mlk\Panel\Providers\PanelServiceProvider::class,

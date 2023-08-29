@@ -26,6 +26,7 @@ class helper
     public const UserNotFound = 'کاربر مورد نظر پیدا نشد';
     public const DuplicateUser = 'کابر قبلا در سامانه عضو شده است';
     public const DuplicatePlate = 'پلاک وارد شده تکراری میباشد';
+    public const DuplicateTradeID = 'شناسه صنفی وارد شده تکراری میباشد!';
     public const Error = 'مشکلی پیش آمده است، لطفا چند دقیقه بعد مجدد اقدام کنید';
     public const WrongYearForCar = 'سال تولید خودرو اشتباه ثبت شده است';
     public const CategoryNotSend = 'دسته بندی خودرو وارد نشده است';

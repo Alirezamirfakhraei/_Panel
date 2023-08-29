@@ -46,9 +46,8 @@ $function = new Functions();
                                     <td>
                                             <?php
                                             $character = $function->truePlateView($car->plate);
-                                            $split = str_split($car->plate, 1);
+                                            $split = str_split($car->plate);
                                             ?>
-
                                         <div class="license-plate mt-1">
                                             <div class="blue-column">
                                                 <div class="flag">
@@ -76,43 +75,52 @@ $function = new Functions();
                                     <td>
                                         <div class="row">
                                             <!-- Button trigger modal -->
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                            <div class="d-flex align-items-center justify-content-center" >
+                                                <button type="button"  class="btn btn-primary" id="myModal" data-toggle="modal"
+                                                        data-target="#myModal{{$car->id}}">
                                                     جزئیات خودرو
                                                 </button>
                                             </div>
                                             <!-- Modal -->
-                                            <div class="modal fade modal-center" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal fade modal-center" id="myModal{{$car->id}}" tabindex="-1"
+                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                            <a href="{{route('cars.detail', $car->id)}}" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <h5 class="modal-title" id="exampleModalLabel">توضیحات بیشتر</h5>
+                                                            <a href="" type="button" class="close" data-dismiss="modal"
+                                                               aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </a>
                                                         </div>
                                                         <div class="modal-body">
                                                             <ul class="list-group text-left mb-2">
                                                                 <li class="list-group-item">سال خودرو
+                                                                    <span class="float-right"><?= $car->id ?></span>
+                                                                </li>
+                                                                <li class="list-group-item">سال خودرو
                                                                     <span class="float-right"><?= $car->year ?></span>
                                                                 </li>
-                                                                <li class="list-group-item">    کیلومتر فعلی
+                                                                <li class="list-group-item"> کیلومتر فعلی
                                                                     <span class="float-right"><?= $car->km_current ?></span>
                                                                 </li>
-                                                                <li class="list-group-item">   میانگین کیلومتر خوردو
+                                                                <li class="list-group-item"> میانگین کیلومتر خوردو
                                                                     <span class="float-right"><?= $car->km_average ?></span>
                                                                 </li>
-                                                                <li class="list-group-item">    شماره شاسی
+                                                                <li class="list-group-item"> شماره شاسی
                                                                     <span class="float-right"><?= $car->chassis_number ?></span>
                                                                 </li>
-                                                                <li class="list-group-item">    شماره موتور
+                                                                <li class="list-group-item"> شماره موتور
                                                                     <span class="float-right"><?= $car->engine_number ?></span>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a type="button" class="btn btn-secondary" style="color: white" data-dismiss="modal">بازگشت</a>
-                                                            <a href="{{ route('cars.edit', $car->id) }}" type="button" class="btn btn-primary" style="color: white">تغییر اطلاعات خودرو</a>
+                                                            <a type="button" class="btn btn-secondary"
+                                                               style="color: white" data-dismiss="modal">بازگشت</a>
+                                                            <a href="{{ route('cars.edit', $car->id) }}" type="button"
+                                                               class="btn btn-primary" style="color: white">تغییر
+                                                                اطلاعات خودرو</a>
                                                         </div>
                                                     </div>
                                                 </div>

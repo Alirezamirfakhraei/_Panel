@@ -8,8 +8,6 @@ use Mlk\Category\Models\Category;
 class CarRepo
 {
 
-
-
     private function query()
     {
         return DB::connection('mysql_second')->table("cars");
@@ -18,7 +16,7 @@ class CarRepo
 
     public function findByID($id)
     {
-        return $this->query()->where('id' , $id)->first();
+        return DB::connection('mysql_second')->table("cars")->where('id' , $id)->first();
     }
 
     public function index()

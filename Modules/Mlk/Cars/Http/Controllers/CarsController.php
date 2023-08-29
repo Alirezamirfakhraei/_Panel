@@ -21,7 +21,7 @@ class CarsController extends Controller
     public function index()
     {
         $cars = $this->repo->index();
-        return view('Cars::index', compact(['cars']));
+        return view('Cars::index', compact('cars'));
     }
 
     public function create()

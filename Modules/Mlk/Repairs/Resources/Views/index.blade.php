@@ -28,7 +28,7 @@
                                     <th>کدملی</th>
                                     <th>نام مالک</th>
                                     <th>شناسه صنفی</th>
-                                    <th>اسم تعمیرگاه</th>
+                                    <th>نام تعمیرگاه</th>
                                     <th>آدرس</th>
                                     <th>وضعیت</th>
                                     <th>تاریخ ورورد</th>
@@ -44,25 +44,24 @@
                                         <td>{{ $repair->national_code }}</td>
                                         <td>{{ $repair->repairOwner }}</td>
                                         <td>{{ $repair->repairID }}</td>
-                                        <td>{{ $repair->repairOwner}}</td>
                                         <td>{{ $repair->repairShop}}</td>
                                         <td>{{ $repair->address}}</td>
                                         <td class="badge badge-success mt-2">@lang($repair->status)</td>
-                                        <td>{{ jdate($repair->created_at)}}</td>
+                                        <td>{{explode(' ' , jdate($repair->created_at))[0]}}</td>
                                         <td>
                                             <div class="row">
                                                 <!-- Button trigger modal -->
                                                 <div class="d-flex align-items-center justify-content-center">
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{$repair->id}}">
                                                         جزئیات تعمیرگاه
                                                     </button>
                                                 </div>
                                                 <!-- Modal -->
-                                                <div class="modal fade modal-center" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade modal-center" id="myModal{{$repair->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">توضیحات بیشتر</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
