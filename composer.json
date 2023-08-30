@@ -35,22 +35,19 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Mlk\\User\\": "Modules/Mlk/User/",
-            "Mlk\\Auth\\": "Modules/Mlk/Auth/",
-            "Mlk\\Panel\\": "Modules/Mlk/Panel/",
-            "Mlk\\Category\\": "Modules/Mlk/Category/",
-            "Mlk\\Role\\": "Modules/Mlk/Role/",
-            "Mlk\\Article\\": "Modules/Mlk/Article/",
-            "Mlk\\Comment\\": "Modules/Mlk/Comment/",
-            "Mlk\\Share\\": "Modules/Mlk/Share/",
-            "Mlk\\Advertising\\": "Modules/Mlk/Advertising/",
-            "Mlk\\Cars\\": "Modules/Mlk/Cars/",
-            "Mlk\\Repairs\\": "Modules/Mlk/Repairs/",
-            "Mlk\\ContactUs\\": "Modules/Mlk/ContactUs/",
-            "Mlk\\Tickets\\": "Modules/Mlk/Tickets/"
+            "Modules\\User\\": "Modules/User/",
+            "Modules\\Auth\\": "Modules/Auth/",
+            "Modules\\Panel\\": "Modules/Panel/",
+            "Modules\\Category\\": "Modules/Category/",
+            "Modules\\Role\\": "Modules/Role/",
+            "Modules\\Share\\": "Modules/Share/",
+            "Modules\\Cars\\": "Modules/Cars/",
+            "Modules\\Repairs\\": "Modules/Repairs/",
+            "Modules\\ContactUs\\": "Modules/ContactUs/",
+            "Modules\\Tickets\\": "Modules/Tickets/"
         },
         "files": [
-            "Modules/Mlk/Share/helpers.php",
+          "Modules/Share/helpers.php",
             "Helper/Helper.php",
             "Helper/Functions.php"
         ]

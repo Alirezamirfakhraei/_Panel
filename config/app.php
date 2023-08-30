@@ -184,19 +184,16 @@ return [
         /*
          * Module Service Providers...
          */
-        Mlk\Cars\Providers\CarServiceProvider::class,
-        Mlk\Repairs\Providers\RepairServiceProvider::class,
-        Mlk\ContactUs\Providers\ContactUsServiceProvider::class,
-        Mlk\Tickets\Providers\TicketsServiceProvider::class,
-        Mlk\User\Providers\UserServiceProvider::class,
-        Mlk\Auth\Providers\AuthServiceProvider::class,
-        Mlk\Panel\Providers\PanelServiceProvider::class,
-        Mlk\Category\Providers\CategoryServiceProvider::class,
-        Mlk\Role\Providers\RoleServiceProvider::class,
-        Mlk\Article\Providers\ArticleServiceProvider::class,
-        Mlk\Comment\Providers\CommentServiceProvider::class,
-        Mlk\Share\Providers\ShareServiceProvider::class,
-        Mlk\Advertising\Providers\AdvertisingServiceProvider::class,
+        Modules\Cars\Providers\CarServiceProvider::class,
+        Modules\Repairs\Providers\RepairServiceProvider::class,
+        Modules\ContactUs\Providers\ContactUsServiceProvider::class,
+        Modules\Tickets\Providers\TicketsServiceProvider::class,
+        Modules\User\Providers\UserServiceProvider::class,
+        Modules\Auth\Providers\AuthServiceProvider::class,
+        Modules\Panel\Providers\PanelServiceProvider::class,
+        Modules\Category\Providers\CategoryServiceProvider::class,
+        Modules\Role\Providers\RoleServiceProvider::class,
+        Modules\Share\Providers\ShareServiceProvider::class,
         Anetwork\Validation\PersianValidationServiceProvider::class,
 
         /*
