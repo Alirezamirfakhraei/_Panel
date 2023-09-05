@@ -23,6 +23,12 @@ class TicketsController extends Controller
         return view('Tickets::index' , compact('tickets'));
     }
 
+    public function edit($id)
+    {
+        $ticket = $this->repository->findByID($id);
+        return view('Tickets::edit' , compact('ticket'));
+    }
+
     public function showAllTicket()
     {
         $tickets = $this->repository->index();

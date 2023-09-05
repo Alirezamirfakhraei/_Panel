@@ -190,6 +190,7 @@ return [
         Modules\Tickets\Providers\TicketsServiceProvider::class,
         Modules\User\Providers\UserServiceProvider::class,
         Modules\Auth\Providers\AuthServiceProvider::class,
+        Modules\Service\Providers\ServicesServiceProvider::class,
         Modules\Panel\Providers\PanelServiceProvider::class,
         Modules\Category\Providers\CategoryServiceProvider::class,
         Modules\Role\Providers\RoleServiceProvider::class,

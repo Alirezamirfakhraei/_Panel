@@ -15,7 +15,7 @@
                     </div>
                     <div class="float-right">
                         <a href="{{route('all.tickets')}}" class="arrow-none btn btn-blue text-white" aria-expanded="false">
-                            لیست تیکت های جاری
+                            لیست تیکت ها
                         </a>
                     </div>
                     <h4 class="mt-0 header-title">لیست تیکت های جاری </h4>
@@ -90,18 +90,18 @@
                                                         <div class="modal-footer">
                                                             <a type="button" class="btn btn-secondary"
                                                                style="color: white" data-dismiss="modal">بازگشت</a>
-                                                            <a href="{{ route('cars.edit', $ticket->id) }}" type="button"
+                                                            <a href="{{ route('tickets.edit', $ticket->id) }}" type="button"
                                                                class="btn btn-primary" style="color: white">تغییر
-                                                                اطلاعات خودرو</a>
+                                                                 تیکت</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="{{ route('cars.edit', $ticket->id) }}" class="btn btn-warning ml-1">
+                                            <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-warning ml-1">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                             <form onsubmit="return confirm('آیا مایل به حذف کاربر میباشید؟');"
-                                                  action="{{ route('cars.destroy',$ticket->id) }}" method="POST">
+                                                  action="{{ route('tickets.destroy',$ticket->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger ml-1">

@@ -2,7 +2,6 @@
 
 namespace Modules\Cars\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Modules\Cars\Http\Requests\CarRequest;
 use Modules\Cars\Repositories\CarRepo;
 use Modules\Cars\Services\CarService;

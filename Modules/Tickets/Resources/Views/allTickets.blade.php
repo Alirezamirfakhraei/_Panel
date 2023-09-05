@@ -48,7 +48,7 @@
                                     <td class="align-middle">{{explode(' ' , jdate($ticket->created_at))[0]}}</td>
                                     <td class="align-middle">
                                         <div class="row">
-                                            <a href="{{ route('repairs.edit', $ticket->id) }}"
+                                            <a href="{{ route('tickets.edit', $ticket->id) }}"
                                                class="btn btn-warning ml-1">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>

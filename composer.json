@@ -44,7 +44,8 @@
             "Modules\\Cars\\": "Modules/Cars/",
             "Modules\\Repairs\\": "Modules/Repairs/",
             "Modules\\ContactUs\\": "Modules/ContactUs/",
-            "Modules\\Tickets\\": "Modules/Tickets/"
+            "Modules\\Tickets\\": "Modules/Tickets/",
+            "Modules\\Service\\": "Modules/Service/"
         },
         "files": [
           "Modules/Share/helpers.php",

@@ -1,4 +1,4 @@
-@extends('Panel::layouts.master')
+    @extends('Panel::layouts.master')
 <?php
 $function = new Functions();
 ?>
