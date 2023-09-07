@@ -31,6 +31,7 @@ class helper
     public const WrongYearForCar = 'سال تولید خودرو اشتباه ثبت شده است';
     public const CategoryNotSend = 'دسته بندی خودرو وارد نشده است';
     public const CategoryNotFound = 'دسته بندی خودرو پیدا نشد';
+    public const ServiceNotFound = 'سرویسی برای خودرو پیدا نشد';
 
 
 

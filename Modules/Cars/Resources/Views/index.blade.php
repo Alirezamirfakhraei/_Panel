@@ -138,7 +138,7 @@ $function = new Functions();
                                             <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-warning ml-1">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <form onsubmit="return confirm('آیا مایل به حذف کاربر میباشید؟');"
+                                            <form onsubmit="return confirm('آیا مایل به حذف خودرو میباشید؟');"
                                                   action="{{ route('cars.destroy',$car->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
