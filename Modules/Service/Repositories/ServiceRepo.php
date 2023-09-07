@@ -21,6 +21,6 @@ class ServiceRepo
 
     public function getServiceUser($request)
     {
-        return  $this->query()->where('userID' , $request->userID)->where('carID' , $request->carID)->paginate(20);
+        return  $this->query()->where('carID' , $request->carID)->paginate(20);
     }
 }
