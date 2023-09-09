@@ -8,6 +8,7 @@
             <div class="col-12">
                 <div class="card-box">
                     <h4 class="m-t-0 header-title">تاریخچه سرویس کاربران</h4>
+                    <br>
                     <div class="row">
                         <div class="col-12">
                             <div class="p-2">
@@ -41,7 +42,8 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-outline-success">ذخیره</button>
+                                    <br>
+                                    <button type="submit" class="float-right w-25 btn btn-outline-success">ذخیره</button>
                                 </form>
                             </div>
                         </div>

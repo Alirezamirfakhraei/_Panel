@@ -11,6 +11,8 @@ $function = new Functions();
             <div class="col-lg-12">
                 <div class="card-box">
                     <h4 class="mt-0 header-title">تاریخچه سرویس تعمیرکار</h4>
+                    <br>
+
                     @if (session()->has('success_delete'))
                         <br>
                         <div class="alert alert-success">{{ session()->get('success_delete') }}</div>
@@ -81,19 +83,12 @@ $function = new Functions();
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a type="button" class="btn btn-secondary"
-                                                               style="color: white" data-dismiss="modal">بازگشت</a>
-                                                            <a href="{{ route('cars.edit', $service->id) }}"
-                                                               type="button"
-                                                               class="btn btn-primary" style="color: white">تغییر
-                                                                اطلاعات سرویس</a>
+                                                               style="color: white" data-dismiss="modal">بازگشت
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="{{ route('cars.edit', $service->id) }}"
-                                               class="btn btn-warning ml-1">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
                                             <form onsubmit="return confirm('آیا مایل به حذف  سرویس قطعه میباشید؟');"
                                                   action="{{ route('cars.destroy',$service->id) }}" method="POST">
                                                 @csrf

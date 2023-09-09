@@ -11,7 +11,7 @@
                     <div class="float-right">
                         <a href="{{route('repairs.create')}}" class="arrow-none btn btn-primary text-white"
                            aria-expanded="false">
-                            ثبت تعمیرکار جدید
+                            افزودن تعمیرکار جدید
                         </a>
                     </div>
                     <h4 class="mt-0 header-title">لیست تمامی تعمیرکاران</h4>
@@ -28,12 +28,11 @@
                                 <th>شماره همراه</th>
                                 <th>نام و نام خانوادگی</th>
                                 <th>کدملی</th>
-                                <th>نام مالک</th>
                                 <th>شناسه صنفی</th>
                                 <th>نام تعمیرگاه</th>
                                 <th>آدرس</th>
                                 <th>وضعیت</th>
-                                <th>تاریخ ورورد</th>
+                                <th>تاریخ ثبت</th>
                                 <th>عملیات</th>
                             </tr>
                             </thead>
@@ -44,7 +43,6 @@
                                     <td class="align-middle">{{ $repair->userID }}</td>
                                     <td class="align-middle">{{ $repair->name.''.$repair->lastname }}</td>
                                     <td class="align-middle">{{ $repair->national_code }}</td>
-                                    <td class="align-middle">{{ $repair->repairOwner }}</td>
                                     <td class="align-middle">{{ $repair->repairID }}</td>
                                     <td class="align-middle">{{ $repair->repairShop}}</td>
                                     <td class="align-middle">{{ $repair->address}}</td>
@@ -144,7 +142,7 @@
                                                             <a type="button" class="btn btn-secondary"
                                                                style="color: white" data-dismiss="modal">بازگشت</a>
                                                             <a href="{{ route('repairs.edit', $repair->id) }}"
-                                                               type="button" class="btn btn-primary"
+                                                               type="button" class="btn btn-warning"
                                                                style="color: white">تغییر اطلاعات تعمیرگاه</a>
                                                         </div>
                                                     </div>

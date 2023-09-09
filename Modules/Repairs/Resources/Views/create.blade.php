@@ -7,7 +7,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-box">
-                    <h4 class="m-t-0 header-title">ساخت تعمیرکار جدید</h4>
+                    <h4 class="m-t-0 header-title">افزودن تعمیرکار جدید</h4>
+                    <br>
                     <div class="row">
                         <div class="col-12">
                             <div class="p-2">
@@ -133,7 +134,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="submit_plate">آدرس</label>
                                         <div class="col-sm-10">
@@ -162,8 +162,8 @@
                                         </div>
                                     </div>
 
-
-                                    <button type="submit" class="btn btn-outline-success">ذخیره</button>
+                                    <br>
+                                    <button type="submit" class="float-right w-25 btn btn-outline-success">ذخیره</button>
                                 </form>
                             </div>
                         </div>

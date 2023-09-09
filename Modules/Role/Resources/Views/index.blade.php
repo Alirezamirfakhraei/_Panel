@@ -9,7 +9,7 @@
                 <div class="card-box">
                     <div class="float-right">
                         <a href="{{ route('roles.create') }}" class="arrow-none btn btn-primary text-white" aria-expanded="false">
-                            ساخت مقام جدید
+                            افزودن مقام جدید
                         </a>
                     </div>
                     <h4 class="mt-0 header-title">لیست تمامی مقام ها</h4>
@@ -21,7 +21,7 @@
                                     <th>ردیف</th>
                                     <th>عنوان</th>
                                     <th>دسترسی های مقام</th>
-                                    <th>تاریخ ساخت</th>
+                                    <th>تاریخ ثبت</th>
                                     <th>عملیات</th>
                                 </tr>
                             </thead>
@@ -31,7 +31,7 @@
                                         <th class="align-middle" scope="row">{{ $loop->iteration }}</th>
                                         <td class="align-middle">{{ $role->name }}</td>
                                         @foreach ($role->permissions as $permission)
-                                        <td  class="align-middle badge badge-primary mt-2 ">
+                                        <td  class="align-middle badge badge-primary mt-2 ml-1 mr-1 ">
                                                 <span>
                                                     @lang($permission->name)
                                                 </span>

@@ -14,8 +14,8 @@
                         </a>
                     </div>
                     <div class="float-right">
-                        <a href="{{route('all.tickets')}}" class="arrow-none btn btn-blue text-white" aria-expanded="false">
-                            لیست تیکت ها
+                        <a href="{{route('all.tickets')}}" class="arrow-none btn btn-secondary text-white" aria-expanded="false">
+                            لیست کل تیکت ها
                         </a>
                     </div>
                     <h4 class="mt-0 header-title">لیست تیکت های جاری </h4>
@@ -34,7 +34,6 @@
                                 <th>نوع تیکت</th>
                                 <th>شماره همراه</th>
                                 <th>موضوع پیام</th>
-                                <th>متن پیام</th>
                                 <th>تاریخ ثبت</th>
                                 <th>عملیات</th>
                             </tr>
@@ -54,7 +53,6 @@
                                     <td class="align-middle">@lang($ticket->type)</td>
                                     <td class="align-middle">{{ $ticket->userID}}</td>
                                     <td class="align-middle">{{ $ticket->subject }}</td>
-                                    <td class="align-middle">{{ $ticket->message }}</td>
                                     <td class="align-middle">{{explode(' ' , jdate($ticket->created_at))[0]}}</td>
                                     <td class="align-middle">
                                         <div class="row">
@@ -85,21 +83,28 @@
                                                                 <li class="list-group-item">اولویت تیکت
                                                                     <span class="float-right badge badge-purple mt-1">@lang($ticket->priority)</span>
                                                                 </li>
-                                                            </ul>
+                                                                <li class="list-group-item " style="color: #d04949">متن پیام
+                                                                    <span class="float-right  mt-1"><?= $ticket->message ?></span>
+                                                                </li>
+                                                             </ul>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a type="button" class="btn btn-secondary"
-                                                               style="color: white" data-dismiss="modal">بازگشت</a>
-                                                            <a href="{{ route('tickets.edit', $ticket->id) }}" type="button"
-                                                               class="btn btn-primary" style="color: white">تغییر
-                                                                 تیکت</a>
+                                                               style="color: white" data-dismiss="modal">
+                                                                بازگشت
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-warning ml-1">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
+                                            <form onsubmit="return confirm('آیا مایل به تغییر وضعیت تیکیت میباشید؟');"
+                                                  action="{{ route('tickets.change.status',$ticket->id) }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-dark ml-1">
+                                                    <i class="fas fa-spinner"></i>
+                                                </button>
+                                            </form>
                                             <form onsubmit="return confirm('آیا مایل به حذف کاربر میباشید؟');"
                                                   action="{{ route('tickets.destroy',$ticket->id) }}" method="POST">
                                                 @csrf

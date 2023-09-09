@@ -24,7 +24,6 @@
                                 <th>نوع تیکت</th>
                                 <th>شماره همراه</th>
                                 <th>موضوع پیام</th>
-                                <th>متن پیام</th>
                                 <th>تاریخ ثبت</th>
                                 <th>عملیات</th>
                             </tr>
@@ -44,25 +43,68 @@
                                     <td class="align-middle">@lang($ticket->type)</td>
                                     <td class="align-middle">{{ $ticket->userID}}</td>
                                     <td class="align-middle">{{ $ticket->subject }}</td>
-                                    <td class="align-middle">{{ $ticket->message }}</td>
                                     <td class="align-middle">{{explode(' ' , jdate($ticket->created_at))[0]}}</td>
                                     <td class="align-middle">
                                         <div class="row">
-                                            <a href="{{ route('tickets.edit', $ticket->id) }}"
-                                               class="btn btn-warning ml-1">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
+                                            <!-- Button trigger modal -->
+                                            <div class="d-flex align-items-center justify-content-center" >
+                                                <button type="button"  class="btn btn-primary" id="myModal" data-toggle="modal"
+                                                        data-target="#myModal{{$ticket->id}}">
+                                                    جزئیات تیکت
+                                                </button>
+                                            </div>
+                                            <!-- Modal -->
+                                            <div class="modal fade modal-center" id="myModal{{$ticket->id}}" tabindex="-1"
+                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">توضیحات بیشتر</h5>
+                                                            <a href="" type="button" class="close" data-dismiss="modal"
+                                                               aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </a>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <ul class="list-group text-left">
+                                                                <li class="list-group-item">وضعیت تیکت
+                                                                    <span class="float-right badge badge-pink mt-1">@lang($ticket->status)</span>
+                                                                </li>
+                                                                <li class="list-group-item">اولویت تیکت
+                                                                    <span class="float-right badge badge-purple mt-1">@lang($ticket->priority)</span>
+                                                                </li>
+                                                                <li class="list-group-item " style="color: #d04949">متن پیام
+                                                                    <span class="float-right  mt-1"><?= $ticket->message ?></span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a type="button" class="btn btn-secondary"
+                                                               style="color: white" data-dismiss="modal">
+                                                                بازگشت
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <form onsubmit="return confirm('آیا مایل به تغییر وضعیت تیکیت میباشید؟');"
                                                   action="{{ route('tickets.change.status',$ticket->id) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="btn btn-bordred-dark ml-1">
+                                                <button type="submit" class="btn btn-dark ml-1">
                                                     <i class="fas fa-spinner"></i>
+                                                </button>
+                                            </form>
+                                            <form onsubmit="return confirm('آیا مایل به حذف کاربر میباشید؟');"
+                                                  action="{{ route('tickets.destroy',$ticket->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger ml-1">
+                                                    <i class="fas fa-times"></i>
                                                 </button>
                                             </form>
                                         </div>
                                     </td>
-
                                 </tr>
                             @endforeach
                             </tbody>

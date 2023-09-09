@@ -32,7 +32,7 @@ $function = new Functions();
                                 <th>شناسه خودرو</th>
                                 <th>پلاک</th>
                                 <th>بیمه شخص ثالث</th>
-                                <th>تاریخ ورود</th>
+                                <th>تاریخ ثبت</th>
                                 <th>عملیات</th>
                             </tr>
                             </thead>
@@ -108,9 +108,6 @@ $function = new Functions();
                                                                 <li class="list-group-item">سال خودرو
                                                                     <span class="float-right"><?= $car->id ?></span>
                                                                 </li>
-                                                                <li class="list-group-item">سال خودرو
-                                                                    <span class="float-right"><?= $car->year ?></span>
-                                                                </li>
                                                                 <li class="list-group-item"> کیلومتر فعلی
                                                                     <span class="float-right"><?= $car->km_current ?></span>
                                                                 </li>
@@ -127,9 +124,10 @@ $function = new Functions();
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a type="button" class="btn btn-secondary"
-                                                               style="color: white" data-dismiss="modal">بازگشت</a>
+                                                               style="color: white" data-dismiss="modal">
+                                                                بازگشت</a>
                                                             <a href="{{ route('cars.edit', $car->id) }}" type="button"
-                                                               class="btn btn-primary" style="color: white">تغییر
+                                                               class="btn btn-warning" style="color: white">تغییر
                                                                 اطلاعات خودرو</a>
                                                         </div>
                                                     </div>

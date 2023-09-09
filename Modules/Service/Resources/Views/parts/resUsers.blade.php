@@ -11,6 +11,7 @@ $function = new Functions();
             <div class="col-lg-12">
                 <div class="card-box">
                     <h4 class="mt-0 header-title">تاریخچه سرویس کاربر</h4>
+                    <br>
                     @if (session()->has('success_delete'))
                         <br>
                         <div class="alert alert-success">{{ session()->get('success_delete') }}</div>
@@ -21,10 +22,10 @@ $function = new Functions();
                             <thead>
                             <tr class="text-center">
                                 <th>ردیف</th>
-                                <th>شماره همراه کاربر</th>
-                                <th>شناسه سرویس</th>
+                                <th>قطعه/سرویس</th>
+                                <th>نوع ثبت سرویس</th>
                                 <th>تعمیرکار</th>
-                                <th>تاریخ ثبت سرویس</th>
+                                <th>تاریخ ثبت</th>
                                 <th>عملیات</th>
                             </tr>
                             </thead>
@@ -32,9 +33,9 @@ $function = new Functions();
                             @foreach($services as $service)
                                 <tr class="text-center">
                                     <th class="align-middle" scope="row">{{ $loop->iteration }}</th>
-                                    <td class="align-middle">{{ $service->servicerID }}</td>
-                                    <td class="align-middle">{{ $service->referenceID}}</td>
-                                    <td class="align-middle">{{ $service->repairMan}}</td>
+                                    <td class="align-middle"> @lang($service->pieceName)</td>
+                                    <td class="align-middle"> @lang($service->referenceID)</td>
+                                    <td class="align-middle">@lang($service->repairMan)</td>
                                     <td class="align-middle">{{ explode(' ' , jdate($service->created_at))[0] }}</td>
                                     <td class="align-middle">
                                         <div class="row">
@@ -62,16 +63,16 @@ $function = new Functions();
                                                         </div>
                                                         <div class="modal-body">
                                                             <ul class="list-group text-left mb-2">
-                                                                <li class="list-group-item">نام قطعه
+                                                                <li class="list-group-item"> قطعه/سرویس
                                                                     <span class="float-right">@lang($service->pieceName)</span>
                                                                 </li>
-                                                                <li class="list-group-item">نوع قطعه
+                                                                <li class="list-group-item">نوع
                                                                     <span class="float-right">@lang($service->type)</span>
                                                                 </li>
                                                                 <li class="list-group-item">کیلومتر تعویض
                                                                     <span class="float-right"><?= $service->kmReplace ?></span>
                                                                 </li>
-                                                                <li class="list-group-item">کیلومتر قطعه
+                                                                <li class="list-group-item">عمر قطعه/سرویس
                                                                     <span class="float-right"><?= $service->kmRequest ?></span>
                                                                 </li>
                                                                 <li class="list-group-item">توضیحات
@@ -90,10 +91,6 @@ $function = new Functions();
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="{{ route('cars.edit', $service->id) }}"
-                                               class="btn btn-warning ml-1">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
                                             <form onsubmit="return confirm('آیا مایل به حذف  سرویس قطعه میباشید؟');"
                                                   action="{{ route('cars.destroy',$service->id) }}" method="POST">
                                                 @csrf

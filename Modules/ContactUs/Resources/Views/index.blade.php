@@ -1,19 +1,14 @@
 @php use Modules\ContactUs\Models\ContactUs; @endphp
 @extends('Panel::layouts.master')
 
-@section('title', 'لیست پیام ها')
+@section('title', 'لیست انتقادات و پیشنهادات ')
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card-box">
-                    <div class="float-right">
-                        <a href="" class="arrow-none btn btn-primary text-white" aria-expanded="false">
-                            ثبت تعمیرکار جدید
-                        </a>
-                    </div>
-                    <h4 class="mt-0 header-title">لیست تمامی پیام ها</h4>
+                    <h4 class="mt-0 header-title">لیست تمامی انتقادات و پیشنهادات </h4>
                     @if (session()->has('success_delete'))
                         <br>
                         <div class="alert alert-success">{{ session()->get('success_delete') }}</div>
@@ -27,8 +22,7 @@
                                 <th>نام و نام خانوادگی</th>
                                 <th>موضوع پیام</th>
                                 <th>متن پیام</th>
-                                <th>متن پیام</th>
-                                <th>تاریخ ورورد</th>
+                                <th>تاریخ ثبت</th>
                                 <th>عملیات</th>
                             </tr>
                             </thead>
@@ -41,17 +35,12 @@
                                     @elseif($message->status == ContactUs::STATUS_READ)
                                         <td class="badge badge-secondary mt-2">{{ $message->name }}</td>
                                     @endif
-                                    <td class="align-middle">{{ $message->name}}</td>
                                     <td class="align-middle">{{ $message->subject }}</td>
                                     <td class="align-middle">{{ $message->message }}</td>
                                     <td class="align-middle">{{explode(' ' , jdate($message->created_at))[0]}}</td>
                                     <td class="align-middle">
                                         <div class="row">
-                                            <a href="{{ route('repairs.edit', $message->id) }}"
-                                               class="btn btn-warning ml-1">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
-                                            <form onsubmit="return confirm('آیا مایل به حذف کاربر میباشید؟');"
+                                            <form onsubmit="return confirm('آیا مایل به حذف پیام میباشید؟');"
                                                   action="{{ route('repairs.destroy',$message->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')

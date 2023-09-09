@@ -15,10 +15,10 @@ class RolePolicy
         //
     }
 
-//    public function index(User $user)
-//    {
-//        if ($user->hasPermissionTo(Permission::PERMISSION_ROLES)) {
-//            return true;
-//        }
-//    }
+    public function index(User $user)
+    {
+        if ($user->hasPermissionTo(Permission::PERMISSION_ROLES)) {
+            return true;
+        }
+    }
 }

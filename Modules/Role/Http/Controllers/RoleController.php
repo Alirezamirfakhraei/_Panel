@@ -22,7 +22,7 @@ class RoleController extends Controller
 
     public function index()
     {
-//        $this->authorize('index', Role::class);
+        $this->authorize('index', Role::class);
         $roles = $this->repo->index()->paginate(15);
         return view('Role::index', compact('roles'));
     }

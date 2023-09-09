@@ -6,7 +6,7 @@
             <div class="dropdown">
                 <a href="#" class="text-dark h5 mt-2 mb-1 d-block"></a>
             </div>
-            <p class="text-muted">پنل مدیریت اسکارپین</p>
+            <h1 style="font-size: 18px;color: whitesmoke">سامانه پشتیبانی</h1>
         </div>
         @include('Panel::section.side-menu')
         <div class="clearfix"></div>

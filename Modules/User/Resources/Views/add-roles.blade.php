@@ -1,13 +1,14 @@
 @extends('Panel::layouts.master')
 
-@section('title', 'اد کردن مقام به کاربر')
+@section('title', 'افزودن مقام به کاربر')
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card-box">
-                    <h4 class="m-t-0 header-title">اد کردن مقام به کاربر</h4>
+                    <h4 class="m-t-0 header-title">افزودن مقام به کاربر</h4>
+                    <br>
                     <div class="row">
                         <div class="col-12">
                             <div class="p-2">
@@ -34,7 +35,8 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-outline-success">ذخیره</button>
+                                    <br>
+                                    <button type="submit" class="float-right w-25 btn btn-outline-success">ذخیره</button>
                                 </form>
                             </div>
                         </div>

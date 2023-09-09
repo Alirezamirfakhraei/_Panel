@@ -9,7 +9,7 @@
                 <div class="card-box">
                     <div class="float-right">
                         <a href="{{ route('categories.create') }}" class="arrow-none btn btn-primary text-white" aria-expanded="false">
-                            ساخت دسته بندی جدید
+                            افزودن دسته بندی جدید
                         </a>
                     </div>
                     <h4 class="mt-0 header-title">لیست تمامی دسته بندی</h4>

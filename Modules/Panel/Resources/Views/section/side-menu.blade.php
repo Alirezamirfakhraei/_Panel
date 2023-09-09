@@ -12,4 +12,7 @@
             @endforeach
         @endif
     </ul>
+    <div class="version-custom">
+        ورژن یک
+    </div>
 </div>

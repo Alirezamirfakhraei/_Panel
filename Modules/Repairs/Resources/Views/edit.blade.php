@@ -32,12 +32,12 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label" for="telephone">شماره تماس همراه</label>
+                                        <label class="col-sm-2 col-form-label" for="telephone">شماره تلفن </label>
                                         <div class="col-sm-10">
                                             <input type="text" value="{{ $repair->telephone  }}"
                                                    class="form-control @error('telephone') is-invalid @enderror"
                                                    id="telephone" name="telephone"
-                                                   placeholder="شماره تماس کاربر را وارد کنید">
+                                                   placeholder="شماره تلفن را وارد کنید">
                                             @error('telephone')
                                             <br>
                                             <div class="alert alert-danger">{{ $message }}</div>
