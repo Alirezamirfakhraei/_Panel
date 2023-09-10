@@ -2,6 +2,7 @@
 
 namespace Modules\Cars\Http\Controllers;
 
+use RealRashid\SweetAlert\Facades\Alert;
 use Modules\Cars\Http\Requests\CarRequest;
 use Modules\Cars\Repositories\CarRepo;
 use Modules\Cars\Services\CarService;
@@ -58,7 +59,7 @@ class CarsController extends Controller
 
     public function destroy($id)
     {
-//        $this->authorize('index', User::class);
+//      $this->authorize('index', User::class);
         $this->service->delete($id);
         return to_route('cars.index');
     }

@@ -6,6 +6,7 @@ $function = new Functions();
 @section('title', 'لیست وسایل نقلیه')
 
 @section('content')
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -133,11 +134,8 @@ $function = new Functions();
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-warning ml-1">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </a>
-                                            <form onsubmit="return confirm('آیا مایل به حذف خودرو میباشید؟');"
-                                                  action="{{ route('cars.destroy',$car->id) }}" method="POST">
+                                            <form id="myForm" action="{{ route('cars.destroy',$car->id) }}" method="POST"
+                                                  onclick="confirmation(event)">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger ml-1">
@@ -157,4 +155,50 @@ $function = new Functions();
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        function confirmation(ev) {
+            ev.preventDefault();
+            var myForm = document.getElementById("myForm");
+            var urlToRedirect = ev.currentTarget.getAttribute('href');
+            Swal.fire({
+                title: 'آیا از حذف خودرو مربوطه مطمین هستید؟',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'بله',
+                cancelButtonText:'خیر'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    ).then((willCancel) => {
+                        if (willCancel) {
+                            // window.location.href = urlToRedirect;
+                            myForm.submit();
+                        }
+                    });
+                }else {
+
+                }
+            })
+            swal({
+                title: "test1",
+                text: "test2",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willCancel) => {
+                    if (willCancel) {
+                        // window.location.href = urlToRedirect;
+                        myForm.submit();
+                    }
+                });
+        }
+    </script>
 @endsection

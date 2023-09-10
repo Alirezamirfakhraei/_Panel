@@ -403,7 +403,10 @@ ul {
 }
 .preloader img.jump {
     max-height: 100px;
+    width: 50px;
+    height: 50px;
 }
+
 .align-center-vertical {
     margin-top: auto;
     margin-bottom: auto;
@@ -2224,6 +2227,7 @@ pre {
 .jump {
     transform-origin: 0;
     animation: jump 0.5s linear alternate infinite;
+
 }
 
 .style-article-img {

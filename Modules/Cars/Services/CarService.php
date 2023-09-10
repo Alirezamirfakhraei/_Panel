@@ -139,7 +139,6 @@ class CarService
 
     public function delete($id)
     {
-        toast(helper::SubmitRequest, 'success');
         return $this->query()->where('id', $id)->delete();
     }
 
