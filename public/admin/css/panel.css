@@ -1,0 +1,22 @@
+
+.separator{
+    display:flex;
+    align-items: center;
+}
+
+.separator .line{
+    height: 1px;
+    flex: 1;
+    background-color: #000;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.separator h2{
+    padding: 0 2rem;
+}
+
+
+.left-side-menu{
+    background: whitesmoke !important;
+}
