@@ -9,35 +9,24 @@ use Modules\User\Models\User;
 
 class PanelRepo
 {
-
-    public function user_count()
+    public function user_count(): int
     {
         return DB::connection('mysql_second')->table("users")->count();
     }
 
-    public function cat_count()
+    public function messages_count(): int
     {
-        return DB::connection('mysql_second')->table("categories")->count();
+        return DB::connection('mysql_second')->table("contact_us")->count();
     }
 
-    public function car_count()
+    public function car_count(): int
     {
         return DB::connection('mysql_second')->table("cars")->count();
     }
 
-    public function repair_count()
+    public function repair_count(): int
     {
         return DB::connection('mysql_second')->table("repairs")->count();
     }
 
-
-//    public function getLatestAuthorUsers()
-//    {
-//        return User::query()->permission(Permission::PERMISSION_AUTHORS)->latest()->limit(4)->get();
-//    }
-
-//    public function getLatestArticles()
-//    {
-//        return Article::query()->latest()->limit(10)->get();
-//    }
 }

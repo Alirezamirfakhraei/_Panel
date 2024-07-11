@@ -3,9 +3,9 @@
 namespace Modules\Auth\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Modules\Share\Http\Controllers\Controller;
 
 class LogoutController extends Controller
 {

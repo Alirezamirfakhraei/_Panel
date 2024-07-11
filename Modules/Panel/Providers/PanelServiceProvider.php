@@ -15,7 +15,6 @@ class PanelServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views/', 'Panel');
         $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'panelConfig');
-
         Route::middleware('web')->namespace('Modules\Panel\Http\Controllers')->group(__DIR__ . '/../Routes/panel_routes.php');
         Gate::policy(Panel::class, PanelPolicy::class);
     }
@@ -23,12 +22,9 @@ class PanelServiceProvider extends ServiceProvider
     {
         $this->app->booted(static function () {
             config()->set('panelConfig.menus.panel', [
-                'url'   => route('panel.index'),
                 'title' => 'داشبورد',
-                'icon'  => 'view-dashboard',
-                'permissions' => [
-                    Permission::PERMISSION_PANEL
-                ]
+                'url' => \route('panel.index'),
+                'icon' => 'view-dashboard',
             ]);
         });
 

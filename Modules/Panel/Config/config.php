@@ -1,8 +1,7 @@
 <?php
 
-return [
-    'menus' => [
-        'panel' => [],
-        'users' => [],
-    ],
+$array = [
+    'panel' => [],
+    'users' => [],
 ];
+return $array;

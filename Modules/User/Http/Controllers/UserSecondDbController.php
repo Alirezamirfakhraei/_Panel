@@ -3,7 +3,7 @@
 namespace Modules\User\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\Share\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Modules\User\Http\Requests\AddUserRequest;
 use Modules\User\Repositories\Main\UsersRepository;
 use Modules\User\Services\Main\UserService;
@@ -65,4 +65,11 @@ class UserSecondDbController extends Controller
         $this->service->update($request, $id);
         return to_route('users.index');
     }
+
+    public function getUsersInactive()
+    {
+        $this->repository->getUsersInactive();
+        return to_route('users.index');
+    }
+
 }

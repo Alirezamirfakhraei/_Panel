@@ -4,11 +4,11 @@ namespace Modules\Auth\Http\Controllers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Modules\Auth\Http\Requests\PasswordUpdateRequest;
 use Modules\Auth\Http\Requests\SendEmailPasswordRecoveryRequest;
-use Modules\Share\Http\Controllers\Controller;
 
 class ResetController extends Controller
 {

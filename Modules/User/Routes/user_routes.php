@@ -12,10 +12,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], static function ($ro
         Route::delete('users/remove/{userId}/role/{roleId}', 'removeRole')->name('users.remove.role');
         Route::resource('users', 'UserController', ['except' => 'show']);
     });
-});
-
-Route::group(['prefix' => 'admin'], static function ($router) {
-    $router->controller(UserSecondDbController::class)->group(function ($router) {
+    Route::controller(UserSecondDbController::class)->group(function ($router) {
         //register user
         Route::get('users/create', 'create')->name('users.create');
         Route::post('users/create', 'store')->name('users.store');
@@ -23,10 +20,13 @@ Route::group(['prefix' => 'admin'], static function ($router) {
         Route::get('users', 'index')->name('users.index');
         //edit user
         Route::get('users/edit/{id}', 'edit')->name('users.edit');
-//        Route::post('users/edit/{id}', 'edit')->name('users.update');
         Route::match(['put', 'patch'], 'users/edit/{id}', 'update')->name('users.update');
         //delete user
         Route::delete('users/remove/{id}', 'destroy')->name('users.destroy');
+        //inactive users
+    });
+
+    Route::group(['prefix' => 'admin'], static function ($router) {
         $router->get('send/email', static function () {
             dispatch(new Modules\User\Jobs\SendEmailToUserJob('milwad@gmail.com'));
             return 'send';
@@ -42,7 +42,6 @@ Route::group(['prefix' => 'admin'], static function ($router) {
         })->name('mark.notifications');
         $router->get('fire/event', static function () {
             event(new Modules\User\Events\SendEmailToUserEvent('milwad@gmail.com'));
-
             return 'event fired';
         });
     });

@@ -2,12 +2,13 @@
 
 namespace Modules\User\Services\Main;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use helper;
 
 class UserService
 {
-    private function query()
+    private function query(): Builder
     {
         return DB::connection('mysql_second')->table("users");
     }

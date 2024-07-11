@@ -2,9 +2,9 @@
 
 namespace Modules\Panel\Http\Controllers;
 
+use Illuminate\Routing\Controller;
 use Modules\Panel\Models\Panel;
 use Modules\Panel\Repositories\PanelRepo;
-use Modules\Share\Http\Controllers\Controller;
 
 class PanelController extends Controller
 {

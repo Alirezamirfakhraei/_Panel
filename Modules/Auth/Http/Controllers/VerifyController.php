@@ -4,7 +4,7 @@ namespace Modules\Auth\Http\Controllers;
 
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-use Modules\Share\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 
 class VerifyController extends Controller
 {

@@ -184,12 +184,9 @@ return [
         /*
          * Module Service Providers...
          */
+        Modules\Panel\Providers\PanelServiceProvider::class,
         Modules\User\Providers\UserServiceProvider::class,
         Modules\Auth\Providers\AuthServiceProvider::class,
-        Modules\Panel\Providers\PanelServiceProvider::class,
-        Modules\Role\Providers\RoleServiceProvider::class,
-        Modules\Share\Providers\ShareServiceProvider::class,
-        Anetwork\Validation\PersianValidationServiceProvider::class,
 
         /*
          * Package Service Providers...

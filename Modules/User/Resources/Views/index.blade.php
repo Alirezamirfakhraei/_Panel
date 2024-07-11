@@ -52,10 +52,6 @@
                                             <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <a href="{{ route('users.add.role', $user->id) }}"
-                                               class="btn btn-success ml-1">
-                                                <i class="fas fa-plus"></i>
-                                            </a>
                                             <form onsubmit="return confirm('آیا مایل به حذف کاربر میباشید؟');" action="{{ route('users.destroy', $user->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')

@@ -29,19 +29,6 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label" for="email">ایمیل کاربری</label>
-                                        <div class="col-sm-10">
-                                            <input type="email"
-                                                   class="form-control @error('email') is-invalid @enderror"
-                                                   value="{{ $user->email }}" id="email" name="email"
-                                                   placeholder="ایمیل کاربری را وارد کنید">
-                                            @error('email')
-                                            <br>
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="name">نام کاربر</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -104,6 +91,20 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label" for="telephone">شغل</label>
+                                        <div class="col-sm-10">
+                                            <input type="text"
+                                                   class="form-control @error('job') is-invalid @enderror"
+                                                   value="{{ $user->job }}" id="job" name="job"
+                                                   placeholder="شغل کاربر را وارد کنید">
+                                            @error('job')
+                                            <br>
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <button type="submit" class="btn btn-outline-success">ذخیره</button>
                                 </form>
                             </div>

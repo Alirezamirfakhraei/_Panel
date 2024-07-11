@@ -36,13 +36,9 @@
             "Database\\Seeders\\": "database/seeders/",
             "Modules\\User\\": "Modules/User/",
             "Modules\\Auth\\": "Modules/Auth/",
-            "Modules\\Panel\\": "Modules/Panel/",
-            "Modules\\Role\\": "Modules/Role/",
-            "Modules\\Share\\": "Modules/Share/"
-
+            "Modules\\Panel\\": "Modules/Panel/"
         },
         "files": [
-          "Modules/Share/helpers.php",
             "Helper/Helper.php",
             "Helper/Functions.php"
         ]

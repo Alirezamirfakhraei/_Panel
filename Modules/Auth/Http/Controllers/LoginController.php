@@ -3,9 +3,9 @@
 namespace Modules\Auth\Http\Controllers;
 
 use helper;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Auth\Http\Requests\LoginRequest;
-use Modules\Share\Http\Controllers\Controller;
 use Modules\User\Models\User;
 
 class LoginController extends Controller

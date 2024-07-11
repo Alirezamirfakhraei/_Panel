@@ -3,9 +3,9 @@
 namespace Modules\Auth\Http\Controllers;
 
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Routing\Controller;
 use Modules\Auth\Http\Requests\RegisterRequest;
 use Modules\Auth\Services\RegisterService;
-use Modules\Share\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {

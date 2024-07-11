@@ -3,8 +3,7 @@
 namespace Modules\User\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\Role\Repositories\RoleRepo;
-use Modules\Share\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Modules\User\Http\Requests\AddRoleRequest;
 use Modules\User\Http\Requests\UserRequest;
 use Modules\User\Http\Requests\UserUpdateRequest;
